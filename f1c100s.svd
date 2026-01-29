@@ -1,0 +1,4534 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
+  <vendor>Allwinner</vendor>
+  <name>f1c100s</name>
+  <version>1.0</version>
+  <description>The Allwinner F1C100s is a small SoC with an ARM926EJ-S CPU core and 32MB of embedded DDR SDRAM.</description>
+  <licenseText>
+    THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+    EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+    MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+    See the Mulan PSL v2 for more details.
+  </licenseText>
+  
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>0x20</size>
+  <access>read-write</access>
+  <resetValue>0x00000000</resetValue>
+
+  <peripherals>
+      <peripheral>
+      <name>CCU</name>
+      <description>Clock Control Unit - PLLs, Bus Clocks, Gating and Reset</description>
+      <groupName>CCU</groupName>
+      <baseAddress>0x01C20000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <!-- PLL_CPU Control Register -->
+        <register>
+          <name>PLL_CPU_CTRL</name>
+          <description>PLL CPU Control Register</description>
+          <addressOffset>0x000</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00001000</resetValue>
+          <fields>
+            <field>
+              <name>PLL_EN</name>
+              <description>PLL Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LOCK</name>
+              <description>PLL Lock Status (read-only)</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PLL_OUT_EXT_DIV_P</name>
+              <description>PLL Output External Divider P: 00=/1, 01=/2, 10=/4</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_N</name>
+              <description>PLL Factor N (N=Factor+1, range 1-32)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_K</name>
+              <description>PLL Factor K (K=Factor+1, range 1-4)</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_M</name>
+              <description>PLL Factor M (M=Factor+1, range 1-4)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL_AUDIO Control Register -->
+        <register>
+          <name>PLL_AUDIO_CTRL</name>
+          <description>PLL Audio Control Register</description>
+          <addressOffset>0x008</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00005514</resetValue>
+          <fields>
+            <field>
+              <name>PLL_EN</name>
+              <description>PLL Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LOCK</name>
+              <description>PLL Lock Status</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PLL_SDM_EN</name>
+              <description>PLL Sigma-Delta Modulation Enable</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_N</name>
+              <description>PLL Factor N (N=Factor+1, range 1-128)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>PLL_PREDIV_M</name>
+              <description>PLL Pre-div Factor M (M=Factor+1, range 1-32)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL_VIDEO Control Register -->
+        <register>
+          <name>PLL_VIDEO_CTRL</name>
+          <description>PLL Video Control Register</description>
+          <addressOffset>0x010</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x03006207</resetValue>
+          <fields>
+            <field>
+              <name>PLL_EN</name>
+              <description>PLL Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_MODE</name>
+              <description>PLL Mode: 0=Manual, 1=Auto (Controlled by DE)</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LOCK</name>
+              <description>PLL Lock Status</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>FRAC_CLK_OUT</name>
+              <description>Fractional Clock Output: 0=270MHz, 1=297MHz</description>
+              <bitOffset>25</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_MODE_SEL</name>
+              <description>PLL Mode Select: 0=Fractional, 1=Integer</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_SDM_EN</name>
+              <description>PLL Sigma-Delta Modulation Enable</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_N</name>
+              <description>PLL Factor N (N=Factor+1, range 1-128)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>PLL_PREDIV_M</name>
+              <description>PLL Pre-div Factor M (M=Factor+1, range 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL_VE Control Register -->
+        <register>
+          <name>PLL_VE_CTRL</name>
+          <description>PLL VE Control Register</description>
+          <addressOffset>0x018</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x03004507</resetValue>
+          <fields>
+            <field>
+              <name>PLL_EN</name>
+              <description>PLL Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LOCK</name>
+              <description>PLL Lock Status</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>FRAC_CLK_OUT</name>
+              <description>Fractional Clock Output: 0=270MHz, 1=297MHz</description>
+              <bitOffset>25</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_MODE_SEL</name>
+              <description>PLL Mode Select: 0=Fractional, 1=Integer</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_N</name>
+              <description>PLL Factor N (N=Factor+1, range 1-128)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>PLL_PREDIV_M</name>
+              <description>PLL Pre-div Factor M (M=Factor+1, range 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL_DDR Control Register -->
+        <register>
+          <name>PLL_DDR_CTRL</name>
+          <description>PLL DDR Control Register</description>
+          <addressOffset>0x020</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000C11</resetValue>
+          <fields>
+            <field>
+              <name>PLL_EN</name>
+              <description>PLL Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LOCK</name>
+              <description>PLL Lock Status</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>SDRAM_SIGMA_DELTA_EN</name>
+              <description>SDRAM Sigma-Delta Enable</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_DDR_CFG_UPDATE</name>
+              <description>PLL DDR Configuration Update</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_N</name>
+              <description>PLL Factor N (N=Factor+1, range 1-32)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_K</name>
+              <description>PLL Factor K (K=Factor+1, range 1-4)</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_M</name>
+              <description>PLL Factor M (M=Factor+1, range 1-4)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL_PERIPH Control Register -->
+        <register>
+          <name>PLL_PERIPH_CTRL</name>
+          <description>PLL Peripheral Control Register</description>
+          <addressOffset>0x028</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00041801</resetValue>
+          <fields>
+            <field>
+              <name>PLL_EN</name>
+              <description>PLL Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LOCK</name>
+              <description>PLL Lock Status</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PLL_24M_OUT_EN</name>
+              <description>PLL 24MHz Output Enable</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_24M_POST_DIV</name>
+              <description>PLL 24M Output Clock Post Divider (1/2/3/4)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_N</name>
+              <description>PLL Factor N (N=Factor+1, range 1-32)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_K</name>
+              <description>PLL Factor K (K=Factor+1, range 1-4)</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PLL_FACTOR_M</name>
+              <description>PLL Factor M (M=Factor+1, range 1-4)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- CPU Clock Source Register -->
+        <register>
+          <name>CPU_CLK_SRC</name>
+          <description>CPU Clock Source Register</description>
+          <addressOffset>0x050</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00010000</resetValue>
+          <fields>
+            <field>
+              <name>CPU_CLK_SRC_SEL</name>
+              <description>CPU Clock Source Select: 00=LOSC, 01=OSC24M, 1X=PLL_CPU</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- AHB/APB/HCLKC Configuration Register -->
+        <register>
+          <name>AHB_APB_HCLKC_CFG</name>
+          <description>AHB/APB/HCLKC Configuration Register</description>
+          <addressOffset>0x054</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00011010</resetValue>
+          <fields>
+            <field>
+              <name>HCLKC_DIV</name>
+              <description>HCLKC Clock Divide Ratio: 00=/1, 01=/2, 10=/3, 11=/4</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>AHB_CLK_SRC_SEL</name>
+              <description>AHB Clock Source: 00=LOSC, 01=OSC24M, 10=CPUCLK, 11=PLL_PERIPH/AHB_PREDIV</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>APB_CLK_RATIO</name>
+              <description>APB Clock Divide Ratio: 0X=/2, 10=/4, 11=/8</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>AHB_PRE_DIV</name>
+              <description>AHB Clock Pre-divide Ratio: 00=/1, 01=/2, 10=/3, 11=/4</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>AHB_CLK_DIV_RATIO</name>
+              <description>AHB Clock Divide Ratio: 00=/1, 01=/2, 10=/4, 11=/8</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Bus Clock Gating Register 0 -->
+        <register>
+          <name>BUS_CLK_GATING0</name>
+          <description>Bus Clock Gating Register 0</description>
+          <addressOffset>0x060</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>USB_OTG_GATING</name>
+              <description>Gating Clock For USB-OTG</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPI1_GATING</name>
+              <description>Gating Clock For SPI1</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPI0_GATING</name>
+              <description>Gating Clock For SPI0</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SDRAM_GATING</name>
+              <description>Gating Clock For SDRAM</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SD1_GATING</name>
+              <description>Gating Clock For SD1</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SD0_GATING</name>
+              <description>Gating Clock For SD0</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_GATING</name>
+              <description>Gating Clock For DMA</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Bus Clock Gating Register 1 -->
+        <register>
+          <name>BUS_CLK_GATING1</name>
+          <description>Bus Clock Gating Register 1</description>
+          <addressOffset>0x064</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DEFE_GATING</name>
+              <description>Gating Clock For DEFE</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DEBE_GATING</name>
+              <description>Gating Clock For DEBE</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TVE_GATING</name>
+              <description>Gating Clock For TVE</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TVD_GATING</name>
+              <description>Gating Clock For TVD</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CSI_GATING</name>
+              <description>Gating Clock For CSI</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DEINTERLACE_GATING</name>
+              <description>Gating Clock For DE Interlacer</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LCD_GATING</name>
+              <description>Gating Clock For LCD</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VE_GATING</name>
+              <description>Gating Clock For VE</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Bus Clock Gating Register 2 -->
+        <register>
+          <name>BUS_CLK_GATING2</name>
+          <description>Bus Clock Gating Register 2</description>
+          <addressOffset>0x068</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>UART2_GATING</name>
+              <description>Gating Clock For UART2</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>UART1_GATING</name>
+              <description>Gating Clock For UART1</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>UART0_GATING</name>
+              <description>Gating Clock For UART0</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TWI2_GATING</name>
+              <description>Gating Clock For TWI2</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TWI1_GATING</name>
+              <description>Gating Clock For TWI1</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TWI0_GATING</name>
+              <description>Gating Clock For TWI0</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DAUDIO_GATING</name>
+              <description>Gating Clock For DAUDIO</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RSB_GATING</name>
+              <description>Gating Clock For RSB</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CIR_GATING</name>
+              <description>Gating Clock For CIR</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OWA_GATING</name>
+              <description>Gating Clock For OWA</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AUDIO_CODEC_GATING</name>
+              <description>Gating Clock For AUDIOCODEC</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- SDMMC0 Clock Register -->
+        <register>
+          <name>SDMMC0_CLK</name>
+          <description>SDMMC0 Clock Register</description>
+          <addressOffset>0x088</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source Select: 00=OSC24M, 01=PLL_PERIPH</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SAMPLE_CLK_PHASE_CTR</name>
+              <description>Sample Clock Phase Control (0-7)</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_N</name>
+              <description>Clock Pre-Divide Ratio N (2^n, divider 1/2/4/8)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>OUTPUT_CLK_PHASE_CTR</name>
+              <description>Output Clock Phase Control (0-7)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_M</name>
+              <description>Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- SDMMC1 Clock Register -->
+        <register>
+          <name>SDMMC1_CLK</name>
+          <description>SDMMC1 Clock Register</description>
+          <addressOffset>0x08C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source Select: 00=OSC24M, 01=PLL_PERIPH</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SAMPLE_CLK_PHASE_CTR</name>
+              <description>Sample Clock Phase Control (0-7)</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_N</name>
+              <description>Clock Pre-Divide Ratio N (2^n, divider 1/2/4/8)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>OUTPUT_CLK_PHASE_CTR</name>
+              <description>Output Clock Phase Control (0-7)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_M</name>
+              <description>Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- DAUDIO Clock Register -->
+        <register>
+          <name>DAUDIO_CLK</name>
+          <description>DAUDIO Clock Register</description>
+          <addressOffset>0x0B0</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source: 00=PLL_AUDIO(8X), 01=PLL_AUDIO(8X)/2, 10=PLL_AUDIO(8X)/4, 11=PLL_AUDIO(8X)/8</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- OWA Clock Register -->
+        <register>
+          <name>OWA_CLK</name>
+          <description>OWA Clock Register</description>
+          <addressOffset>0x0B4</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00010000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source: 00=PLL2(8X), 01=PLL2(8X)/2, 10=PLL2(8X)/4, 11=PLL2(8X)/8</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- CIR Clock Register -->
+        <register>
+          <name>CIR_CLK</name>
+          <description>CIR Clock Register</description>
+          <addressOffset>0x0B8</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source Select: 00=LOSC, 01=OSC24M</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_N</name>
+              <description>Clock Pre-divide Ratio N (2^n, divider 1/2/4/8)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_M</name>
+              <description>Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- USBPHY Clock Register -->
+        <register>
+          <name>USBPHY_CLK</name>
+          <description>USBPHY Clock Register</description>
+          <addressOffset>0x0CC</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>USBPHY 24MHz Clock Gating</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>USBPHY_RST</name>
+              <description>USB PHY Reset Control: 0=Assert, 1=De-assert</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- DRAM Gating Register -->
+        <register>
+          <name>DRAM_GATING</name>
+          <description>DRAM GATING Register</description>
+          <addressOffset>0x100</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BE_DCLK_GATING</name>
+              <description>Gating DRAM SCLK(1X) For BE</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FE_DCLK_GATING</name>
+              <description>Gating DRAM SCLK(1X) For FE</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TVD_DCLK_GATING</name>
+              <description>Gating DRAM SCLK(1X) For TVD</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DEINTERLACE_DCLK_GATING</name>
+              <description>Gating DRAM SCLK(1X) For DEINTERLACE</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CSI_DCLK_GATING</name>
+              <description>Gating DRAM SCLK(1X) For CSI</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VE_DCLK_GATING</name>
+              <description>Gating DRAM SCLK(1X) For VE</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- BE Clock Register -->
+        <register>
+          <name>BE_CLK</name>
+          <description>BE Clock Register</description>
+          <addressOffset>0x104</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source: 000=PLL_VIDEO, 010=PLL_PERIPH</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_M</name>
+              <description>Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- FE Clock Register -->
+        <register>
+          <name>FE_CLK</name>
+          <description>FE Clock Register</description>
+          <addressOffset>0x10C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source: 000=PLL_VIDEO, 010=PLL_PERIPH</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_M</name>
+              <description>Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- TCON Clock Register -->
+        <register>
+          <name>TCON_CLK</name>
+          <description>TCON Clock Register</description>
+          <addressOffset>0x118</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source: 000=PLL_VIDEO(1X), 010=PLL_VIDEO(2X)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- De-interlacer Clock Register -->
+        <register>
+          <name>DI_CLK</name>
+          <description>De-interlacer Clock Register</description>
+          <addressOffset>0x11C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source: 000=PLL_VIDEO(1X), 010=PLL_VIDEO(2X)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_M</name>
+              <description>Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- TVE Clock Register -->
+        <register>
+          <name>TVE_CLK</name>
+          <description>TVE Clock Register</description>
+          <addressOffset>0x120</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK2_GATING</name>
+              <description>Gating Special Clock 2</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SCLK2_SRC_SEL</name>
+              <description>SClock2 Source: 000=PLL_VIDEO(1X), 010=PLL_VIDEO(2X)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>SCLK1_GATING</name>
+              <description>Gating Special Clock 1</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SCLK1_SRC_SEL</name>
+              <description>SClock1 Source: 0=TVE_SCLK2, 1=TVE_SCLK2/2</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_M</name>
+              <description>Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- TVD Clock Register -->
+        <register>
+          <name>TVD_CLK</name>
+          <description>TVD Clock Register</description>
+          <addressOffset>0x124</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CLK_SRC_SEL</name>
+              <description>Clock Source: 000=PLL_VIDEO(1X), 001=OSC24M, 010=PLL_VIDEO(2X)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DIV_RATIO_M</name>
+              <description>Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- CSI Clock Register -->
+        <register>
+          <name>CSI_CLK</name>
+          <description>CSI Clock Register</description>
+          <addressOffset>0x134</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CSI_MCLK_GATING</name>
+              <description>Gating Master Clock</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MCLK_SRC_SEL</name>
+              <description>Master Clock Source: 000=PLL_VIDEO(1X), 101=OSC24M</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>CSI_MCLK_DIV_M</name>
+              <description>CSI Master Clock Divide Ratio M (m+1, divider 1-16)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- VE Clock Register -->
+        <register>
+          <name>VE_CLK</name>
+          <description>VE Clock Register</description>
+          <addressOffset>0x13C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock (SCLK=PLL_VE output)</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Audio Codec Clock Register -->
+        <register>
+          <name>AUDIO_CODEC_CLK</name>
+          <description>Audio Codec Clock Register</description>
+          <addressOffset>0x140</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock (SCLK=PLL_AUDIO output)</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- AVS Clock Register -->
+        <register>
+          <name>AVS_CLK</name>
+          <description>AVS Clock Register</description>
+          <addressOffset>0x144</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SCLK_GATING</name>
+              <description>Gating Special Clock (SCLK=OSC24M)</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL Stable Time Register 0 -->
+        <register>
+          <name>PLL_STABLE_TIME0</name>
+          <description>PLL Stable Time Register 0</description>
+          <addressOffset>0x200</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x000000FF</resetValue>
+          <fields>
+            <field>
+              <name>PLL_LOCK_TIME</name>
+              <description>PLL Lock Time (Unit: us)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL Stable Time Register 1 -->
+        <register>
+          <name>PLL_STABLE_TIME1</name>
+          <description>PLL Stable Time Register 1</description>
+          <addressOffset>0x204</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x000000FF</resetValue>
+          <fields>
+            <field>
+              <name>PLL_CPU_LOCK_TIME</name>
+              <description>PLL CPU Lock Time (Unit: us)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL CPU Bias Register -->
+        <register>
+          <name>PLL_CPU_BIAS</name>
+          <description>PLL CPU Bias Register</description>
+          <addressOffset>0x220</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x08100200</resetValue>
+          <fields>
+            <field>
+              <name>VCO_RST</name>
+              <description>VCO Reset In</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_VCO_BIAS_CTRL</name>
+              <description>PLL VCO Bias Control[3:0]</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>PLL_BIAS_CUR_CTRL</name>
+              <description>PLL Bias Current Control[4:0]</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_LOCK_CTRL</name>
+              <description>PLL Lock Time Control[2:0]</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PLL_DAMP_FACT_CTRL</name>
+              <description>PLL Damping Factor Control[3:0]</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL Audio Bias Register -->
+        <register>
+          <name>PLL_AUDIO_BIAS</name>
+          <description>PLL Audio Bias Register</description>
+          <addressOffset>0x224</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x10100000</resetValue>
+          <fields>
+            <field>
+              <name>PLL_VCO_BIAS</name>
+              <description>PLL VCO Bias Current[4:0]</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_BIAS_CUR</name>
+              <description>PLL Bias Current[4:0]</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL Video Bias Register -->
+        <register>
+          <name>PLL_VIDEO_BIAS</name>
+          <description>PLL Video Bias Register</description>
+          <addressOffset>0x228</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x10100000</resetValue>
+          <fields>
+            <field>
+              <name>PLL_VCO_BIAS_CTRL</name>
+              <description>PLL VCO Bias Control[4:0]</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_BIAS_CTRL</name>
+              <description>PLL Bias Control[4:0]</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_DAMP_FACTOR_CTRL</name>
+              <description>PLL Damping Factor Control[2:0]</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL VE Bias Register -->
+        <register>
+          <name>PLL_VE_BIAS</name>
+          <description>PLL VE Bias Register</description>
+          <addressOffset>0x22C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x10100000</resetValue>
+          <fields>
+            <field>
+              <name>PLL_VCO_BIAS_CTRL</name>
+              <description>PLL VCO Bias Control[4:0]</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_BIAS_CTRL</name>
+              <description>PLL Bias Control[4:0]</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_DAMP_FACTOR_CTRL</name>
+              <description>PLL Damping Factor Control[2:0]</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL DDR Bias Register -->
+        <register>
+          <name>PLL_DDR_BIAS</name>
+          <description>PLL DDR Bias Register</description>
+          <addressOffset>0x230</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x81104000</resetValue>
+          <fields>
+            <field>
+              <name>PLL_VCO_BIAS</name>
+              <description>PLL VCO Bias[3:0]</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>PLL_VCO_GAIN_CTRL_EN</name>
+              <description>PLL VCO Gain Control Enable</description>
+              <bitOffset>25</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_BANDW_CTRL</name>
+              <description>PLL Band Width Control: 0=Narrow, 1=Wide</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_BIAS_CUR_CTRL</name>
+              <description>PLL Bias Current Control</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_VCO_GAIN_CTRL</name>
+              <description>PLL VCO Gain Control Bit[2:0]</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PLL_DAMP_FACTOR_CTRL</name>
+              <description>PLL Damping Factor Control[3:0]</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL Periph Bias Register -->
+        <register>
+          <name>PLL_PERIPH_BIAS</name>
+          <description>PLL Peripheral Bias Register</description>
+          <addressOffset>0x234</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x10100010</resetValue>
+          <fields>
+            <field>
+              <name>PLL_VCO_BIAS</name>
+              <description>PLL VCO Bias[4:0]</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_BIAS_CUR_CTRL</name>
+              <description>PLL Bias Current Control</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLL_BANDW_CTRL</name>
+              <description>PLL Band Width Control: 0=Narrow, 1=Wide</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_DAMP_FACTOR_CTRL</name>
+              <description>PLL Damping Factor Control[1:0]</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL CPU Tuning Register -->
+        <register>
+          <name>PLL_CPU_TUN</name>
+          <description>PLL CPU Tuning Register</description>
+          <addressOffset>0x250</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x0A101010</resetValue>
+          <fields>
+            <field>
+              <name>PLL_BANDWID_CTRL</name>
+              <description>PLL Band Width Control: 0=Narrow, 1=Wide</description>
+              <bitOffset>27</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VCO_GAIN_CTRL_EN</name>
+              <description>VCO Gain Control Enable</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VCO_GAIN_CTRL</name>
+              <description>VCO Gain Control Bits[2:0]</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PLL_INIT_FREQ_CTRL</name>
+              <description>PLL Initial Frequency Control[6:0]</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>C_OD</name>
+              <description>C-Reg-Od For Verify</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>C_BIN</name>
+              <description>C-B-In[6:0] For Verify</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>C_OD1</name>
+              <description>C-Reg-Od1 For Verify</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>C_BOUT</name>
+              <description>C-B-Out[6:0] For Verify (read-only)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>7</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL DDR Tuning Register -->
+        <register>
+          <name>PLL_DDR_TUN</name>
+          <description>PLL DDR Tuning Register</description>
+          <addressOffset>0x260</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x14101010</resetValue>
+          <fields>
+            <field>
+              <name>VREG1_OUT_EN</name>
+              <description>Vreg1 Out Enable</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_LTIME_CTRL</name>
+              <description>PLL Lock Time Control[2:0]</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>VCO_RST</name>
+              <description>VCO Reset In</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLL_INIT_FREQ_CTRL</name>
+              <description>PLL Initial Frequency Control[6:0]</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>OD1</name>
+              <description>Reg-Od1 For Verify</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BIN</name>
+              <description>B-In[6:0] For Verify</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>OD</name>
+              <description>Reg-Od For Verify</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BOUT</name>
+              <description>B-Out[6:0] For Verify (read-only)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>7</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL Audio Pattern Control Register -->
+        <register>
+          <name>PLL_AUDIO_PAT_CTRL</name>
+          <description>PLL Audio Pattern Control Register</description>
+          <addressOffset>0x284</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SIG_DELT_PAT_EN</name>
+              <description>Sigma-Delta Pattern Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPR_FREQ_MODE</name>
+              <description>Spread Frequency Mode: 00=DC=0, 01=DC=1, 1X=Triangular</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>WAVE_STEP</name>
+              <description>Wave Step</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>9</bitWidth>
+            </field>
+            <field>
+              <name>FREQ</name>
+              <description>Frequency: 00=31.5KHz, 01=32KHz, 10=32.5KHz, 11=33KHz</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>WAVE_BOT</name>
+              <description>Wave Bottom</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>17</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL Video Pattern Control Register -->
+        <register>
+          <name>PLL_VIDEO_PAT_CTRL</name>
+          <description>PLL Video Pattern Control Register</description>
+          <addressOffset>0x288</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SIG_DELT_PAT_EN</name>
+              <description>Sigma-Delta Pattern Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPR_FREQ_MODE</name>
+              <description>Spread Frequency Mode: 00=DC=0, 01=DC=1, 1X=Triangular</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>WAVE_STEP</name>
+              <description>Wave Step</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>9</bitWidth>
+            </field>
+            <field>
+              <name>FREQ</name>
+              <description>Frequency: 00=31.5KHz, 01=32KHz, 10=32.5KHz, 11=33KHz</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>WAVE_BOT</name>
+              <description>Wave Bottom</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>17</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- PLL DDR Pattern Control Register -->
+        <register>
+          <name>PLL_DDR_PAT_CTRL</name>
+          <description>PLL DDR Pattern Control Register</description>
+          <addressOffset>0x290</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SIG_DELT_PAT_EN</name>
+              <description>Sigma-Delta Pattern Enable</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPR_FREQ_MODE</name>
+              <description>Spread Frequency Mode: 00=DC=0, 01=DC=1, 1X=Triangular</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>WAVE_STEP</name>
+              <description>Wave Step</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>9</bitWidth>
+            </field>
+            <field>
+              <name>FREQ</name>
+              <description>Frequency: 00=31.5KHz, 01=32KHz, 10=32.5KHz, 11=33KHz</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>WAVE_BOT</name>
+              <description>Wave Bottom</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>17</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Bus Software Reset Register 0 -->
+        <register>
+          <name>BUS_SOFT_RST0</name>
+          <description>Bus Software Reset Register 0</description>
+          <addressOffset>0x2C0</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>USB_OTG_RST</name>
+              <description>USB OTG Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPI1_RST</name>
+              <description>SPI1 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPI0_RST</name>
+              <description>SPI0 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SDRAM_RST</name>
+              <description>SDRAM Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SD1_RST</name>
+              <description>SD/MMC 1 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SD0_RST</name>
+              <description>SD/MMC 0 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_RST</name>
+              <description>DMA Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Bus Software Reset Register 1 -->
+        <register>
+          <name>BUS_SOFT_RST1</name>
+          <description>Bus Software Reset Register 1</description>
+          <addressOffset>0x2C4</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DEFE_RST</name>
+              <description>DEFE Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DEBE_RST</name>
+              <description>DEBE Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TVE_RST</name>
+              <description>TVE Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TVD_RST</name>
+              <description>TVD Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CSI_RST</name>
+              <description>CSI Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DEINTERLACE_RST</name>
+              <description>DEINTERLACE Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LCD_RST</name>
+              <description>LCD Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VE_RST</name>
+              <description>VE Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Bus Software Reset Register 2 -->
+        <register>
+          <name>BUS_SOFT_RST2</name>
+          <description>Bus Software Reset Register 2</description>
+          <addressOffset>0x2D0</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>UART2_RST</name>
+              <description>UART2 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>UART1_RST</name>
+              <description>UART1 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>UART0_RST</name>
+              <description>UART0 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TWI2_RST</name>
+              <description>TWI2 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TWI1_RST</name>
+              <description>TWI1 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TWI0_RST</name>
+              <description>TWI0 Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DAUDIO_RST</name>
+              <description>DAUDIO Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RSB_RST</name>
+              <description>RSB Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CIR_RST</name>
+              <description>CIR Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OWA_RST</name>
+              <description>OWA Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AUDIO_CODEC_RST</name>
+              <description>AUDIOCODEC Reset: 0=Assert, 1=De-assert</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+      </registers>
+    </peripheral>
+    <peripheral>
+      <dim>3</dim>
+      <dimIncrement>0x400</dimIncrement>
+      <name>UART%s</name>
+      <description>Universal asynchronous receiver/transmitter</description>
+      <groupName>UART</groupName>
+      <baseAddress>0x01C25000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>RBR</name>
+          <displayName>RBR</displayName>
+          <description>Receive Buffer Register</description>
+          <alternateRegister>THR</alternateRegister>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Data byte received</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>THR</name>
+          <displayName>THR</displayName>
+          <description>Transmit Holding Register</description>
+          <alternateRegister>RBR</alternateRegister>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Data byte to transmit</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DLL</name>
+          <displayName>DLL</displayName>
+          <description>Divisor Latch Low Register (DLAB=1)</description>
+          <alternateRegister>RBR</alternateRegister>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>DLL</name>
+              <description>Lower 8 bits of baud rate divisor</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DLH</name>
+          <displayName>DLH</displayName>
+          <description>Divisor Latch High Register (DLAB=1)</description>
+          <alternateRegister>IER</alternateRegister>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>DLH</name>
+              <description>Upper 8 bits of baud rate divisor</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>IER</name>
+          <displayName>IER</displayName>
+          <description>Interrupt Enable Register</description>
+          <alternateRegister>DLH</alternateRegister>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PTIME</name>
+              <description>Programmable THRE Interrupt Mode Enable</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>EDSSI</name>
+              <description>Enable Modem Status Interrupt</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ELSI</name>
+              <description>Enable Receiver Line Status Interrupt</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ETBEI</name>
+              <description>Enable Transmit Holding Register Empty Interrupt</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ERBFI</name>
+              <description>Enable Received Data Available Interrupt</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>IIR</name>
+          <displayName>IIR</displayName>
+          <description>Interrupt Identity Register</description>
+          <alternateRegister>FCR</alternateRegister>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>FIFOSE</name>
+              <description>FIFOs Enabled</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IID</name>
+              <description>Interrupt ID</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FCR</name>
+          <displayName>FCR</displayName>
+          <description>FIFO Control Register</description>
+          <alternateRegister>IIR</alternateRegister>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RT</name>
+              <description>Receiver Trigger Level</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>TET</name>
+              <description>TX Empty Trigger Level</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DMAM</name>
+              <description>DMA Mode</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>XFIFOR</name>
+              <description>TX FIFO Reset</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RFIFOR</name>
+              <description>RX FIFO Reset</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FIFOE</name>
+              <description>FIFO Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LCR</name>
+          <displayName>LCR</displayName>
+          <description>Line Control Register</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DLAB</name>
+              <description>Divisor Latch Access Bit</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BC</name>
+              <description>Break Control</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>EPS</name>
+              <description>Even Parity Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PEN</name>
+              <description>Parity Enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STOP</name>
+              <description>Number of Stop Bits</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DLS</name>
+              <description>Data Length Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MCR</name>
+          <displayName>MCR</displayName>
+          <description>Modem Control Register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SIRE</name>
+              <description>SIR Mode Enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AFCE</name>
+              <description>Auto Flow Control Enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LB</name>
+              <description>Loop Back Mode</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RTS</name>
+              <description>Request to Send</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DTR</name>
+              <description>Data Terminal Ready</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LSR</name>
+          <displayName>LSR</displayName>
+          <description>Line Status Register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>RFE</name>
+              <description>RX FIFO Error</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TEMT</name>
+              <description>Transmitter Empty</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>THRE</name>
+              <description>TX Holding Register Empty</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BI</name>
+              <description>Break Interrupt</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FE</name>
+              <description>Framing Error</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PE</name>
+              <description>Parity Error</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OE</name>
+              <description>Overrun Error</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DR</name>
+              <description>Data Ready</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MSR</name>
+          <displayName>MSR</displayName>
+          <description>Modem Status Register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>DCD</name>
+              <description>Data Carrier Detect</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RI</name>
+              <description>Ring Indicator</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DSR</name>
+              <description>Data Set Ready</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CTS</name>
+              <description>Clear to Send</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDCD</name>
+              <description>Delta Data Carrier Detect</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TERI</name>
+              <description>Trailing Edge Ring Indicator</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDSR</name>
+              <description>Delta Data Set Ready</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DCTS</name>
+              <description>Delta Clear to Send</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SCR</name>
+          <displayName>SCR</displayName>
+          <description>Scratch Register</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>SCR</name>
+              <description>Scratch data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>USR</name>
+          <displayName>USR</displayName>
+          <description>UART Status Register</description>
+          <addressOffset>0x7C</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>RFF</name>
+              <description>RX FIFO Full</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>RFNE</name>
+              <description>RX FIFO Not Empty</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TFE</name>
+              <description>TX FIFO Empty</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TFNF</name>
+              <description>TX FIFO Not Full</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BUSY</name>
+              <description>UART Busy</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TFL</name>
+          <displayName>TFL</displayName>
+          <description>Transmit FIFO Level</description>
+          <addressOffset>0x80</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>TFL</name>
+              <description>TX FIFO data count</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RFL</name>
+          <displayName>RFL</displayName>
+          <description>Receive FIFO Level</description>
+          <addressOffset>0x84</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>RFL</name>
+              <description>RX FIFO data count</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>HTX</name>
+          <displayName>HTX</displayName>
+          <description>Halt TX Register</description>
+          <addressOffset>0xA4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SIR_RX_INVERT</name>
+              <description>SIR RX Pulse Polarity Invert</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SIR_TX_INVERT</name>
+              <description>SIR TX Pulse Polarity Invert</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CHANGE_UPDATE</name>
+              <description>Configuration Update Trigger</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CHCFG_AT_BUSY</name>
+              <description>Change Config While Busy</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>HALT_TX</name>
+              <description>Halt TX</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DBG_DLL</name>
+          <displayName>DBG_DLL</displayName>
+          <description>Debug Divisor Latch Low</description>
+          <addressOffset>0xB0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>DBG_DLL</name>
+              <description>Debug DLL value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DBG_DLH</name>
+          <displayName>DBG_DLH</displayName>
+          <description>Debug Divisor Latch High</description>
+          <addressOffset>0xB4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>DBG_DLH</name>
+              <description>Debug DLH value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- Timer -->
+    <peripheral>
+      <name>TIMER</name>
+      <description>Timer, Watchdog and AVS Counter</description>
+      <groupName>TIMER</groupName>
+      <baseAddress>0x01C20C00</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x100</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>TMR_IRQ_EN</name>
+          <displayName>TMR_IRQ_EN</displayName>
+          <description>Timer IRQ Enable Register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TMR2_IRQ_EN</name>
+              <description>Timer 2 Interrupt Enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR1_IRQ_EN</name>
+              <description>Timer 1 Interrupt Enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR0_IRQ_EN</name>
+              <description>Timer 0 Interrupt Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR_IRQ_STA</name>
+          <displayName>TMR_IRQ_STA</displayName>
+          <description>Timer Status Register</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TMR2_IRQ_PEND</name>
+              <description>Timer 2 IRQ Pending (write 1 to clear)</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR1_IRQ_PEND</name>
+              <description>Timer 1 IRQ Pending (write 1 to clear)</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR0_IRQ_PEND</name>
+              <description>Timer 0 IRQ Pending (write 1 to clear)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR0_CTRL</name>
+          <displayName>TMR0_CTRL</displayName>
+          <description>Timer 0 Control Register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000004</resetValue>
+          <fields>
+            <field>
+              <name>TMR0_MODE</name>
+              <description>Timer 0 Mode (0: Continuous, 1: Single)</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR0_CLK_PRES</name>
+              <description>Timer 0 Clock Prescale</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>TMR0_CLK_SRC</name>
+              <description>Timer 0 Clock Source (0: LOSC, 1: OSC24M)</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>TMR0_RELOAD</name>
+              <description>Timer 0 Reload</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR0_EN</name>
+              <description>Timer 0 Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR0_INTV</name>
+          <displayName>TMR0_INTV</displayName>
+          <description>Timer 0 Interval Value Register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TMR0_INTV</name>
+              <description>Timer 0 Interval Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR0_CUR</name>
+          <displayName>TMR0_CUR</displayName>
+          <description>Timer 0 Current Value Register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>TMR0_CUR</name>
+              <description>Timer 0 Current Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR1_CTRL</name>
+          <displayName>TMR1_CTRL</displayName>
+          <description>Timer 1 Control Register</description>
+          <addressOffset>0x20</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000004</resetValue>
+          <fields>
+            <field>
+              <name>TMR1_MODE</name>
+              <description>Timer 1 Mode</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR1_CLK_PRES</name>
+              <description>Timer 1 Clock Prescale</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>TMR1_CLK_SRC</name>
+              <description>Timer 1 Clock Source</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>TMR1_RELOAD</name>
+              <description>Timer 1 Reload</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR1_EN</name>
+              <description>Timer 1 Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR1_INTV</name>
+          <displayName>TMR1_INTV</displayName>
+          <description>Timer 1 Interval Value Register</description>
+          <addressOffset>0x24</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TMR1_INTV</name>
+              <description>Timer 1 Interval Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR1_CUR</name>
+          <displayName>TMR1_CUR</displayName>
+          <description>Timer 1 Current Value Register</description>
+          <addressOffset>0x28</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>TMR1_CUR</name>
+              <description>Timer 1 Current Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR2_CTRL</name>
+          <displayName>TMR2_CTRL</displayName>
+          <description>Timer 2 Control Register</description>
+          <addressOffset>0x30</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000004</resetValue>
+          <fields>
+            <field>
+              <name>TMR2_MODE</name>
+              <description>Timer 2 Mode</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR2_CLK_PRES</name>
+              <description>Timer 2 Clock Prescale</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>TMR2_CLK_SRC</name>
+              <description>Timer 2 Clock Source</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>TMR2_RELOAD</name>
+              <description>Timer 2 Reload</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TMR2_EN</name>
+              <description>Timer 2 Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR2_INTV</name>
+          <displayName>TMR2_INTV</displayName>
+          <description>Timer 2 Interval Value Register</description>
+          <addressOffset>0x34</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TMR2_INTV</name>
+              <description>Timer 2 Interval Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMR2_CUR</name>
+          <displayName>TMR2_CUR</displayName>
+          <description>Timer 2 Current Value Register</description>
+          <addressOffset>0x38</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>TMR2_CUR</name>
+              <description>Timer 2 Current Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AVS_CNT_CTL</name>
+          <displayName>AVS_CNT_CTL</displayName>
+          <description>AVS Counter Control Register</description>
+          <addressOffset>0x80</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>AVS_CNT1_PS</name>
+              <description>AVS Counter 1 Pause</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AVS_CNT0_PS</name>
+              <description>AVS Counter 0 Pause</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AVS_CNT1_EN</name>
+              <description>AVS Counter 1 Enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AVS_CNT0_EN</name>
+              <description>AVS Counter 0 Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AVS_CNT0</name>
+          <displayName>AVS_CNT0</displayName>
+          <description>AVS Counter 0 Register</description>
+          <addressOffset>0x84</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>AVS_CNT0</name>
+              <description>AVS Counter 0 Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AVS_CNT1</name>
+          <displayName>AVS_CNT1</displayName>
+          <description>AVS Counter 1 Register</description>
+          <addressOffset>0x88</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>AVS_CNT1</name>
+              <description>AVS Counter 1 Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AVS_CNT_DIV</name>
+          <displayName>AVS_CNT_DIV</displayName>
+          <description>AVS Counter Divisor Register</description>
+          <addressOffset>0x8C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x05DB05DB</resetValue>
+          <fields>
+            <field>
+              <name>AVS_CNT1_D</name>
+              <description>Divisor N for AVS Counter 1</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+            <field>
+              <name>AVS_CNT0_D</name>
+              <description>Divisor N for AVS Counter 0</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WDOG_IRQ_EN</name>
+          <displayName>WDOG_IRQ_EN</displayName>
+          <description>Watchdog IRQ Enable Register</description>
+          <addressOffset>0xA0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>WDOG_IRQ_EN</name>
+              <description>Watchdog Interrupt Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WDOG_IRQ_STA</name>
+          <displayName>WDOG_IRQ_STA</displayName>
+          <description>Watchdog Status Register</description>
+          <addressOffset>0xA4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>WDOG_IRQ_PEND</name>
+              <description>Watchdog IRQ Pending (write 1 to clear)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WDOG_CTRL</name>
+          <displayName>WDOG_CTRL</displayName>
+          <description>Watchdog Control Register</description>
+          <addressOffset>0xB0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>WDOG_KEY_FIELD</name>
+              <description>Watchdog Key Field (must write 0xA57)</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+            <field>
+              <name>WDOG_RSTART</name>
+              <description>Watchdog Restart</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WDOG_CFG</name>
+          <displayName>WDOG_CFG</displayName>
+          <description>Watchdog Configuration Register</description>
+          <addressOffset>0xB4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>WDOG_CONFIG</name>
+              <description>Watchdog Config (1: Reset whole system, 2: Only interrupt)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WDOG_MODE</name>
+          <displayName>WDOG_MODE</displayName>
+          <description>Watchdog Mode Register</description>
+          <addressOffset>0xB8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>WDOG_INTV</name>
+              <description>Watchdog Interval Value</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>WDOG_EN</name>
+              <description>Watchdog Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- GPIO (PIO) -->
+    <peripheral>
+      <name>PIO</name>
+      <description>Port Controller (GPIO)</description>
+      <groupName>PIO</groupName>
+      <baseAddress>0x01C20800</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x300</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <!-- Port A Registers (offset 0x00) -->
+        <register>
+          <name>PA_CFG0</name>
+          <displayName>PA_CFG0</displayName>
+          <description>PA Configure Register 0</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x77777777</resetValue>
+          <fields>
+            <field>
+              <name>PA3_SELECT</name>
+              <description>PA3 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PA2_SELECT</name>
+              <description>PA2 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PA1_SELECT</name>
+              <description>PA1 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PA0_SELECT</name>
+              <description>PA0 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PA_CFG1</name>
+          <displayName>PA_CFG1</displayName>
+          <description>PA Configure Register 1</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PA_CFG2</name>
+          <displayName>PA_CFG2</displayName>
+          <description>PA Configure Register 2</description>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PA_CFG3</name>
+          <displayName>PA_CFG3</displayName>
+          <description>PA Configure Register 3</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PA_DATA</name>
+          <displayName>PA_DATA</displayName>
+          <description>PA Data Register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PA_DAT</name>
+              <description>PA Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PA_DRV0</name>
+          <displayName>PA_DRV0</displayName>
+          <description>PA Multi-Driving Register 0</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PA_DRV1</name>
+          <displayName>PA_DRV1</displayName>
+          <description>PA Multi-Driving Register 1</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PA_PULL0</name>
+          <displayName>PA_PULL0</displayName>
+          <description>PA Pull Register 0</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PA_PULL1</name>
+          <displayName>PA_PULL1</displayName>
+          <description>PA Pull Register 1</description>
+          <addressOffset>0x20</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <!-- Port B Registers (offset 0x24) -->
+        <register>
+          <name>PB_CFG0</name>
+          <displayName>PB_CFG0</displayName>
+          <description>PB Configure Register 0</description>
+          <addressOffset>0x24</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x77772222</resetValue>
+          <fields>
+            <field>
+              <name>PB3_SELECT</name>
+              <description>PB3 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PB2_SELECT</name>
+              <description>PB2 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PB1_SELECT</name>
+              <description>PB1 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PB0_SELECT</name>
+              <description>PB0 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PB_CFG1</name>
+          <displayName>PB_CFG1</displayName>
+          <description>PB Configure Register 1</description>
+          <addressOffset>0x28</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PB_CFG2</name>
+          <displayName>PB_CFG2</displayName>
+          <description>PB Configure Register 2</description>
+          <addressOffset>0x2C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PB_CFG3</name>
+          <displayName>PB_CFG3</displayName>
+          <description>PB Configure Register 3</description>
+          <addressOffset>0x30</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000007</resetValue>
+        </register>
+        <register>
+          <name>PB_DATA</name>
+          <displayName>PB_DATA</displayName>
+          <description>PB Data Register</description>
+          <addressOffset>0x34</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PB_DAT</name>
+              <description>PB Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PB_DRV0</name>
+          <displayName>PB_DRV0</displayName>
+          <description>PB Multi-Driving Register 0</description>
+          <addressOffset>0x38</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000055</resetValue>
+          <fields>
+            <field>
+              <name>PB3_DRV</name>
+              <description>PB3 Multi-Driving Select</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PB2_DRV</name>
+              <description>PB2 Multi-Driving Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PB1_DRV</name>
+              <description>PB1 Multi-Driving Select</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PB0_DRV</name>
+              <description>PB0 Multi-Driving Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PB_DRV1</name>
+          <displayName>PB_DRV1</displayName>
+          <description>PB Multi-Driving Register 1</description>
+          <addressOffset>0x3C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PB_PULL0</name>
+          <displayName>PB_PULL0</displayName>
+          <description>PB Pull Register 0</description>
+          <addressOffset>0x40</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PB3_PULL</name>
+              <description>PB3 Pull Select</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PB2_PULL</name>
+              <description>PB2 Pull Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PB1_PULL</name>
+              <description>PB1 Pull Select</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PB0_PULL</name>
+              <description>PB0 Pull Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PB_PULL1</name>
+          <displayName>PB_PULL1</displayName>
+          <description>PB Pull Register 1</description>
+          <addressOffset>0x44</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <!-- Port C Registers (offset 0x48) -->
+        <register>
+          <name>PC_CFG0</name>
+          <displayName>PC_CFG0</displayName>
+          <description>PC Configure Register 0</description>
+          <addressOffset>0x48</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x77777777</resetValue>
+          <fields>
+            <field>
+              <name>PC3_SELECT</name>
+              <description>PC3 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PC2_SELECT</name>
+              <description>PC2 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PC1_SELECT</name>
+              <description>PC1 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PC0_SELECT</name>
+              <description>PC0 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PC_CFG1</name>
+          <displayName>PC_CFG1</displayName>
+          <description>PC Configure Register 1</description>
+          <addressOffset>0x4C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PC_CFG2</name>
+          <displayName>PC_CFG2</displayName>
+          <description>PC Configure Register 2</description>
+          <addressOffset>0x50</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PC_CFG3</name>
+          <displayName>PC_CFG3</displayName>
+          <description>PC Configure Register 3</description>
+          <addressOffset>0x54</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PC_DATA</name>
+          <displayName>PC_DATA</displayName>
+          <description>PC Data Register</description>
+          <addressOffset>0x58</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PC_DAT</name>
+              <description>PC Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PC_DRV0</name>
+          <displayName>PC_DRV0</displayName>
+          <description>PC Multi-Driving Register 0</description>
+          <addressOffset>0x5C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000055</resetValue>
+          <fields>
+            <field>
+              <name>PC3_DRV</name>
+              <description>PC3 Multi-Driving Select</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PC2_DRV</name>
+              <description>PC2 Multi-Driving Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PC1_DRV</name>
+              <description>PC1 Multi-Driving Select</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PC0_DRV</name>
+              <description>PC0 Multi-Driving Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PC_DRV1</name>
+          <displayName>PC_DRV1</displayName>
+          <description>PC Multi-Driving Register 1</description>
+          <addressOffset>0x60</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PC_PULL0</name>
+          <displayName>PC_PULL0</displayName>
+          <description>PC Pull Register 0</description>
+          <addressOffset>0x64</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000040</resetValue>
+          <fields>
+            <field>
+              <name>PC3_PULL</name>
+              <description>PC3 Pull Select</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PC2_PULL</name>
+              <description>PC2 Pull Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PC1_PULL</name>
+              <description>PC1 Pull Select</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PC0_PULL</name>
+              <description>PC0 Pull Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PC_PULL1</name>
+          <displayName>PC_PULL1</displayName>
+          <description>PC Pull Register 1</description>
+          <addressOffset>0x68</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <!-- Port D Registers (offset 0x6C) - 22 pins -->
+        <register>
+          <name>PD_CFG0</name>
+          <displayName>PD_CFG0</displayName>
+          <description>PD Configure Register 0</description>
+          <addressOffset>0x6C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x77777777</resetValue>
+          <fields>
+            <field>
+              <name>PD7_SELECT</name>
+              <description>PD7 Select</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD6_SELECT</name>
+              <description>PD6 Select</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD5_SELECT</name>
+              <description>PD5 Select</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD4_SELECT</name>
+              <description>PD4 Select</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD3_SELECT</name>
+              <description>PD3 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD2_SELECT</name>
+              <description>PD2 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD1_SELECT</name>
+              <description>PD1 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD0_SELECT</name>
+              <description>PD0 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_CFG1</name>
+          <displayName>PD_CFG1</displayName>
+          <description>PD Configure Register 1</description>
+          <addressOffset>0x70</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x77777777</resetValue>
+          <fields>
+            <field>
+              <name>PD15_SELECT</name>
+              <description>PD15 Select</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD14_SELECT</name>
+              <description>PD14 Select</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD13_SELECT</name>
+              <description>PD13 Select</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD12_SELECT</name>
+              <description>PD12 Select</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD11_SELECT</name>
+              <description>PD11 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD10_SELECT</name>
+              <description>PD10 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD9_SELECT</name>
+              <description>PD9 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD8_SELECT</name>
+              <description>PD8 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_CFG2</name>
+          <displayName>PD_CFG2</displayName>
+          <description>PD Configure Register 2</description>
+          <addressOffset>0x74</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00777777</resetValue>
+          <fields>
+            <field>
+              <name>PD21_SELECT</name>
+              <description>PD21 Select</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD20_SELECT</name>
+              <description>PD20 Select</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD19_SELECT</name>
+              <description>PD19 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD18_SELECT</name>
+              <description>PD18 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD17_SELECT</name>
+              <description>PD17 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PD16_SELECT</name>
+              <description>PD16 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_CFG3</name>
+          <displayName>PD_CFG3</displayName>
+          <description>PD Configure Register 3</description>
+          <addressOffset>0x78</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PD_DATA</name>
+          <displayName>PD_DATA</displayName>
+          <description>PD Data Register</description>
+          <addressOffset>0x7C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PD_DAT</name>
+              <description>PD Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>22</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_DRV0</name>
+          <displayName>PD_DRV0</displayName>
+          <description>PD Multi-Driving Register 0</description>
+          <addressOffset>0x80</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x55555555</resetValue>
+          <fields>
+            <field>
+              <name>PD_DRV</name>
+              <description>PD0-15 Multi-Driving Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_DRV1</name>
+          <displayName>PD_DRV1</displayName>
+          <description>PD Multi-Driving Register 1</description>
+          <addressOffset>0x84</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000555</resetValue>
+          <fields>
+            <field>
+              <name>PD_DRV</name>
+              <description>PD16-21 Multi-Driving Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_PULL0</name>
+          <displayName>PD_PULL0</displayName>
+          <description>PD Pull Register 0</description>
+          <addressOffset>0x88</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PD_PULL</name>
+              <description>PD0-15 Pull Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_PULL1</name>
+          <displayName>PD_PULL1</displayName>
+          <description>PD Pull Register 1</description>
+          <addressOffset>0x8C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PD_PULL</name>
+              <description>PD16-21 Pull Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <!-- Port E Registers (offset 0x90) - 13 pins -->
+        <register>
+          <name>PE_CFG0</name>
+          <displayName>PE_CFG0</displayName>
+          <description>PE Configure Register 0</description>
+          <addressOffset>0x90</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x77777777</resetValue>
+          <fields>
+            <field>
+              <name>PE7_SELECT</name>
+              <description>PE7 Select</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE6_SELECT</name>
+              <description>PE6 Select</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE5_SELECT</name>
+              <description>PE5 Select</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE4_SELECT</name>
+              <description>PE4 Select</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE3_SELECT</name>
+              <description>PE3 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE2_SELECT</name>
+              <description>PE2 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE1_SELECT</name>
+              <description>PE1 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE0_SELECT</name>
+              <description>PE0 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_CFG1</name>
+          <displayName>PE_CFG1</displayName>
+          <description>PE Configure Register 1</description>
+          <addressOffset>0x94</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00077777</resetValue>
+          <fields>
+            <field>
+              <name>PE12_SELECT</name>
+              <description>PE12 Select</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE11_SELECT</name>
+              <description>PE11 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE10_SELECT</name>
+              <description>PE10 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE9_SELECT</name>
+              <description>PE9 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PE8_SELECT</name>
+              <description>PE8 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_CFG2</name>
+          <displayName>PE_CFG2</displayName>
+          <description>PE Configure Register 2</description>
+          <addressOffset>0x98</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PE_CFG3</name>
+          <displayName>PE_CFG3</displayName>
+          <description>PE Configure Register 3</description>
+          <addressOffset>0x9C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PE_DATA</name>
+          <displayName>PE_DATA</displayName>
+          <description>PE Data Register</description>
+          <addressOffset>0xA0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PE_DAT</name>
+              <description>PE Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>13</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_DRV0</name>
+          <displayName>PE_DRV0</displayName>
+          <description>PE Multi-Driving Register 0</description>
+          <addressOffset>0xA4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x01555555</resetValue>
+          <fields>
+            <field>
+              <name>PE_DRV</name>
+              <description>PE0-12 Multi-Driving Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>26</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_DRV1</name>
+          <displayName>PE_DRV1</displayName>
+          <description>PE Multi-Driving Register 1</description>
+          <addressOffset>0xA8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PE_PULL0</name>
+          <displayName>PE_PULL0</displayName>
+          <description>PE Pull Register 0</description>
+          <addressOffset>0xAC</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PE_PULL</name>
+              <description>PE0-12 Pull Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>26</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_PULL1</name>
+          <displayName>PE_PULL1</displayName>
+          <description>PE Pull Register 1</description>
+          <addressOffset>0xB0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <!-- Port F Registers (offset 0xB4) - 6 pins -->
+        <register>
+          <name>PF_CFG0</name>
+          <displayName>PF_CFG0</displayName>
+          <description>PF Configure Register 0</description>
+          <addressOffset>0xB4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00373333</resetValue>
+          <fields>
+            <field>
+              <name>PF5_SELECT</name>
+              <description>PF5 Select</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PF4_SELECT</name>
+              <description>PF4 Select</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PF3_SELECT</name>
+              <description>PF3 Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PF2_SELECT</name>
+              <description>PF2 Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PF1_SELECT</name>
+              <description>PF1 Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PF0_SELECT</name>
+              <description>PF0 Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PF_CFG1</name>
+          <displayName>PF_CFG1</displayName>
+          <description>PF Configure Register 1</description>
+          <addressOffset>0xB8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PF_CFG2</name>
+          <displayName>PF_CFG2</displayName>
+          <description>PF Configure Register 2</description>
+          <addressOffset>0xBC</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PF_CFG3</name>
+          <displayName>PF_CFG3</displayName>
+          <description>PF Configure Register 3</description>
+          <addressOffset>0xC0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PF_DATA</name>
+          <displayName>PF_DATA</displayName>
+          <description>PF Data Register</description>
+          <addressOffset>0xC4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PF_DAT</name>
+              <description>PF Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PF_DRV0</name>
+          <displayName>PF_DRV0</displayName>
+          <description>PF Multi-Driving Register 0</description>
+          <addressOffset>0xC8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000555</resetValue>
+          <fields>
+            <field>
+              <name>PF5_DRV</name>
+              <description>PF5 Multi-Driving Select</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PF4_DRV</name>
+              <description>PF4 Multi-Driving Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PF3_DRV</name>
+              <description>PF3 Multi-Driving Select</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PF2_DRV</name>
+              <description>PF2 Multi-Driving Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PF1_DRV</name>
+              <description>PF1 Multi-Driving Select</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>PF0_DRV</name>
+              <description>PF0 Multi-Driving Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PF_DRV1</name>
+          <displayName>PF_DRV1</displayName>
+          <description>PF Multi-Driving Register 1</description>
+          <addressOffset>0xCC</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PF_PULL0</name>
+          <displayName>PF_PULL0</displayName>
+          <description>PF Pull Register 0</description>
+          <addressOffset>0xD0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PF_PULL1</name>
+          <displayName>PF_PULL1</displayName>
+          <description>PF Pull Register 1</description>
+          <addressOffset>0xD4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <!-- PD External Interrupt Registers (offset 0x200) -->
+        <register>
+          <name>PD_EINT_CFG0</name>
+          <displayName>PD_EINT_CFG0</displayName>
+          <description>PD External Interrupt Configure Register 0</description>
+          <addressOffset>0x200</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT7_CFG</name>
+              <description>External INT7 Mode</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT6_CFG</name>
+              <description>External INT6 Mode</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT5_CFG</name>
+              <description>External INT5 Mode</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT4_CFG</name>
+              <description>External INT4 Mode</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT3_CFG</name>
+              <description>External INT3 Mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT2_CFG</name>
+              <description>External INT2 Mode</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT1_CFG</name>
+              <description>External INT1 Mode</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT0_CFG</name>
+              <description>External INT0 Mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_EINT_CFG1</name>
+          <displayName>PD_EINT_CFG1</displayName>
+          <description>PD External Interrupt Configure Register 1</description>
+          <addressOffset>0x204</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT15_CFG</name>
+              <description>External INT15 Mode</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT14_CFG</name>
+              <description>External INT14 Mode</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT13_CFG</name>
+              <description>External INT13 Mode</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT12_CFG</name>
+              <description>External INT12 Mode</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT11_CFG</name>
+              <description>External INT11 Mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT10_CFG</name>
+              <description>External INT10 Mode</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT9_CFG</name>
+              <description>External INT9 Mode</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT8_CFG</name>
+              <description>External INT8 Mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_EINT_CFG2</name>
+          <displayName>PD_EINT_CFG2</displayName>
+          <description>PD External Interrupt Configure Register 2</description>
+          <addressOffset>0x208</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT21_CFG</name>
+              <description>External INT21 Mode</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT20_CFG</name>
+              <description>External INT20 Mode</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT19_CFG</name>
+              <description>External INT19 Mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT18_CFG</name>
+              <description>External INT18 Mode</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT17_CFG</name>
+              <description>External INT17 Mode</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT16_CFG</name>
+              <description>External INT16 Mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_EINT_CFG3</name>
+          <displayName>PD_EINT_CFG3</displayName>
+          <description>PD External Interrupt Configure Register 3</description>
+          <addressOffset>0x20C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PD_EINT_CTL</name>
+          <displayName>PD_EINT_CTL</displayName>
+          <description>PD External Interrupt Control Register</description>
+          <addressOffset>0x210</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT_CTL</name>
+              <description>External INT Enable (bit n for PD_EINTn)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>22</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_EINT_STA</name>
+          <displayName>PD_EINT_STA</displayName>
+          <description>PD External Interrupt Status Register</description>
+          <addressOffset>0x214</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT_STA</name>
+              <description>External INT Pending (write 1 to clear)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>22</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PD_EINT_DEB</name>
+          <displayName>PD_EINT_DEB</displayName>
+          <description>PD External Interrupt Debounce Register</description>
+          <addressOffset>0x218</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DEB_CLK_PRE</name>
+              <description>Debounce Clock Prescale</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>DEB_CLK_SEL</name>
+              <description>Debounce Clock Select (0: LOSC, 1: HOSC)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <!-- PE External Interrupt Registers (offset 0x220) -->
+        <register>
+          <name>PE_EINT_CFG0</name>
+          <displayName>PE_EINT_CFG0</displayName>
+          <description>PE External Interrupt Configure Register 0</description>
+          <addressOffset>0x220</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT7_CFG</name>
+              <description>External INT7 Mode</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT6_CFG</name>
+              <description>External INT6 Mode</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT5_CFG</name>
+              <description>External INT5 Mode</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT4_CFG</name>
+              <description>External INT4 Mode</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT3_CFG</name>
+              <description>External INT3 Mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT2_CFG</name>
+              <description>External INT2 Mode</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT1_CFG</name>
+              <description>External INT1 Mode</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT0_CFG</name>
+              <description>External INT0 Mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_EINT_CFG1</name>
+          <displayName>PE_EINT_CFG1</displayName>
+          <description>PE External Interrupt Configure Register 1</description>
+          <addressOffset>0x224</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT12_CFG</name>
+              <description>External INT12 Mode</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT11_CFG</name>
+              <description>External INT11 Mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT10_CFG</name>
+              <description>External INT10 Mode</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT9_CFG</name>
+              <description>External INT9 Mode</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT8_CFG</name>
+              <description>External INT8 Mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_EINT_CFG2</name>
+          <displayName>PE_EINT_CFG2</displayName>
+          <description>PE External Interrupt Configure Register 2</description>
+          <addressOffset>0x228</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PE_EINT_CFG3</name>
+          <displayName>PE_EINT_CFG3</displayName>
+          <description>PE External Interrupt Configure Register 3</description>
+          <addressOffset>0x22C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PE_EINT_CTL</name>
+          <displayName>PE_EINT_CTL</displayName>
+          <description>PE External Interrupt Control Register</description>
+          <addressOffset>0x230</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT_CTL</name>
+              <description>External INT Enable (bit n for PE_EINTn)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>13</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_EINT_STA</name>
+          <displayName>PE_EINT_STA</displayName>
+          <description>PE External Interrupt Status Register</description>
+          <addressOffset>0x234</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT_STA</name>
+              <description>External INT Pending (write 1 to clear)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>13</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PE_EINT_DEB</name>
+          <displayName>PE_EINT_DEB</displayName>
+          <description>PE External Interrupt Debounce Register</description>
+          <addressOffset>0x238</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DEB_CLK_PRE</name>
+              <description>Debounce Clock Prescale</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>DEB_CLK_SEL</name>
+              <description>Debounce Clock Select (0: LOSC, 1: HOSC)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <!-- PF External Interrupt Registers (offset 0x240) -->
+        <register>
+          <name>PF_EINT_CFG0</name>
+          <displayName>PF_EINT_CFG0</displayName>
+          <description>PF External Interrupt Configure Register 0</description>
+          <addressOffset>0x240</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT5_CFG</name>
+              <description>External INT5 Mode</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT4_CFG</name>
+              <description>External INT4 Mode</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT3_CFG</name>
+              <description>External INT3 Mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT2_CFG</name>
+              <description>External INT2 Mode</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT1_CFG</name>
+              <description>External INT1 Mode</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>EINT0_CFG</name>
+              <description>External INT0 Mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PF_EINT_CFG1</name>
+          <displayName>PF_EINT_CFG1</displayName>
+          <description>PF External Interrupt Configure Register 1</description>
+          <addressOffset>0x244</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PF_EINT_CFG2</name>
+          <displayName>PF_EINT_CFG2</displayName>
+          <description>PF External Interrupt Configure Register 2</description>
+          <addressOffset>0x248</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PF_EINT_CFG3</name>
+          <displayName>PF_EINT_CFG3</displayName>
+          <description>PF External Interrupt Configure Register 3</description>
+          <addressOffset>0x24C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PF_EINT_CTL</name>
+          <displayName>PF_EINT_CTL</displayName>
+          <description>PF External Interrupt Control Register</description>
+          <addressOffset>0x250</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT_CTL</name>
+              <description>External INT Enable (bit n for PF_EINTn)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PF_EINT_STA</name>
+          <displayName>PF_EINT_STA</displayName>
+          <description>PF External Interrupt Status Register</description>
+          <addressOffset>0x254</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EINT_STA</name>
+              <description>External INT Pending (write 1 to clear)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PF_EINT_DEB</name>
+          <displayName>PF_EINT_DEB</displayName>
+          <description>PF External Interrupt Debounce Register</description>
+          <addressOffset>0x258</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DEB_CLK_PRE</name>
+              <description>Debounce Clock Prescale</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>DEB_CLK_SEL</name>
+              <description>Debounce Clock Select (0: LOSC, 1: HOSC)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <!-- SDRAM Pad Registers (offset 0x2C0) -->
+        <register>
+          <name>SDR_PAD_DRV</name>
+          <displayName>SDR_PAD_DRV</displayName>
+          <description>SDRAM Pad Multi-Driving Register</description>
+          <addressOffset>0x2C0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00001555</resetValue>
+          <fields>
+            <field>
+              <name>ODT_DRV</name>
+              <description>ODT Multi-Driving Select</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>RAS_CAS_DRV</name>
+              <description>RAS#, CAS#, SWE#, SCS#, CKE Multi-Driving Select</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DQS_DRV</name>
+              <description>DQS Multi-Driving Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DQM_DRV</name>
+              <description>DQM Multi-Driving Select</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>ADDR_DRV</name>
+              <description>DA, BA Multi-Driving Select</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>CLK_DRV</name>
+              <description>CK, CK# Multi-Driving Select</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DQ_DRV</name>
+              <description>DQ Multi-Driving Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SDR_PAD_PULL</name>
+          <displayName>SDR_PAD_PULL</displayName>
+          <description>SDRAM Pad Pull Register</description>
+          <addressOffset>0x2C4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00010105</resetValue>
+          <fields>
+            <field>
+              <name>VREF_INTER_EN</name>
+              <description>Internal Reference Enable</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VREF_CFG</name>
+              <description>Reference Configuration Factor</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+            <field>
+              <name>SDR_PAD_TYPE</name>
+              <description>SDRAM Pad Type (0: LVCMOS, 1: SSTL-2)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DQS_PULL</name>
+              <description>DQS Pull-up Select</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DQM_PULL</name>
+              <description>DQM Pull-up Select</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>CLK_PULL</name>
+              <description>CK, CK# Pull-up Select</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DQ_PULL</name>
+              <description>DQ Pull-up Select</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>
