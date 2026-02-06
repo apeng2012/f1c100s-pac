@@ -4530,5 +4530,2192 @@
         </register>
       </registers>
     </peripheral>
+
+    <!-- ========== INTC: Interrupt Controller ========== -->
+    <peripheral>
+      <name>INTC</name>
+      <description>Interrupt Controller - Handles up to 64 interrupt sources with 4-level priority, fast forcing, and NMI support</description>
+      <groupName>INTC</groupName>
+      <baseAddress>0x01C20400</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x70</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <!-- Interrupt Vector Register -->
+        <register>
+          <name>INTC_VECTOR</name>
+          <description>Interrupt Vector Register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_VECTOR_ADDR</name>
+              <description>Vector address for the interrupt currently active on the CPU IRQ input</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>30</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Base Address Register -->
+        <register>
+          <name>INTC_BASE_ADDR</name>
+          <description>Interrupt Base Address Register</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_BASE_ADDR</name>
+              <description>Upper 30 bits of the base address of the vector table</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>30</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- NMI Interrupt Control Register -->
+        <register>
+          <name>NMI_INT_CTRL</name>
+          <description>NMI Interrupt Control Register</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>NMI_SRC_TYPE</name>
+              <description>External NMI Interrupt Source Type: 00=Low level, 01=Negative edge, 10=High level, 11=Positive edge</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Pending Register 0 -->
+        <register>
+          <name>INTC_PEND_REG0</name>
+          <description>Interrupt IRQ Pending Register 0</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_PEND0</name>
+              <description>Interrupt Source [31:0] Pending/Clear Bit. 0=Not pending, 1=Pending</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Pending Register 1 -->
+        <register>
+          <name>INTC_PEND_REG1</name>
+          <description>Interrupt IRQ Pending Register 1</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_PEND1</name>
+              <description>Interrupt Source [63:32] Pending/Clear Bit. 0=Not pending, 1=Pending</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Enable Register 0 -->
+        <register>
+          <name>INTC_EN_REG0</name>
+          <description>Interrupt Enable Register 0</description>
+          <addressOffset>0x20</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_EN0</name>
+              <description>Interrupt Source [31:0] Enable Bits. 0=Disabled, 1=Enabled</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Enable Register 1 -->
+        <register>
+          <name>INTC_EN_REG1</name>
+          <description>Interrupt Enable Register 1</description>
+          <addressOffset>0x24</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_EN1</name>
+              <description>Interrupt Source [63:32] Enable Bits. 0=Disabled, 1=Enabled</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Mask Register 0 -->
+        <register>
+          <name>INTC_MASK_REG0</name>
+          <description>Interrupt Mask Register 0</description>
+          <addressOffset>0x30</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_MASK0</name>
+              <description>Interrupt Source [31:0] Mask Bits. 0=No effect, 1=Masked. Pending bit still set even if masked.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Mask Register 1 -->
+        <register>
+          <name>INTC_MASK_REG1</name>
+          <description>Interrupt Mask Register 1</description>
+          <addressOffset>0x34</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_MASK1</name>
+              <description>Interrupt Source [63:32] Mask Bits. 0=No effect, 1=Masked. Pending bit still set even if masked.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Response Register 0 -->
+        <register>
+          <name>INTC_RESP_REG0</name>
+          <description>Interrupt Response Register 0</description>
+          <addressOffset>0x40</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_RESP0</name>
+              <description>Interrupt Response Bits [31:0]. If set, interrupts with lower or same priority are masked.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Response Register 1 -->
+        <register>
+          <name>INTC_RESP_REG1</name>
+          <description>Interrupt Response Register 1</description>
+          <addressOffset>0x44</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_RESP1</name>
+              <description>Interrupt Response Bits [63:32]. If set, interrupts with lower or same priority are masked.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Fast Forcing Register 0 -->
+        <register>
+          <name>INTC_FF_REG0</name>
+          <description>Interrupt Fast Forcing Register 0</description>
+          <addressOffset>0x50</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_FF0</name>
+              <description>Fast forcing on interrupt source [31:0]. 0=No effect, 1=Force. Only valid when interrupt enable bit is set.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Fast Forcing Register 1 -->
+        <register>
+          <name>INTC_FF_REG1</name>
+          <description>Interrupt Fast Forcing Register 1</description>
+          <addressOffset>0x54</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTC_FF1</name>
+              <description>Fast forcing on interrupt source [63:32]. 0=No effect, 1=Force. Only valid when interrupt enable bit is set.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Source Priority Register 0 (IRQ 1-15) -->
+        <register>
+          <name>INTC_PRIO_REG0</name>
+          <description>Interrupt Source Priority Register 0 (IRQ 1-15, 2-bit each, 4 levels)</description>
+          <addressOffset>0x60</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>IRQ15_PRIO</name>
+              <description>IRQ 15 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ14_PRIO</name>
+              <description>IRQ 14 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ13_PRIO</name>
+              <description>IRQ 13 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ12_PRIO</name>
+              <description>IRQ 12 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ11_PRIO</name>
+              <description>IRQ 11 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ10_PRIO</name>
+              <description>IRQ 10 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ9_PRIO</name>
+              <description>IRQ 9 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ8_PRIO</name>
+              <description>IRQ 8 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ7_PRIO</name>
+              <description>IRQ 7 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ6_PRIO</name>
+              <description>IRQ 6 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ5_PRIO</name>
+              <description>IRQ 5 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ4_PRIO</name>
+              <description>IRQ 4 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ3_PRIO</name>
+              <description>IRQ 3 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ2_PRIO</name>
+              <description>IRQ 2 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ1_PRIO</name>
+              <description>IRQ 1 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Source Priority Register 1 (IRQ 16-31) -->
+        <register>
+          <name>INTC_PRIO_REG1</name>
+          <description>Interrupt Source Priority Register 1 (IRQ 16-31, 2-bit each, 4 levels)</description>
+          <addressOffset>0x64</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>IRQ31_PRIO</name>
+              <description>IRQ 31 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ30_PRIO</name>
+              <description>IRQ 30 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ29_PRIO</name>
+              <description>IRQ 29 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ28_PRIO</name>
+              <description>IRQ 28 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ27_PRIO</name>
+              <description>IRQ 27 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ26_PRIO</name>
+              <description>IRQ 26 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ25_PRIO</name>
+              <description>IRQ 25 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ24_PRIO</name>
+              <description>IRQ 24 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ23_PRIO</name>
+              <description>IRQ 23 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ22_PRIO</name>
+              <description>IRQ 22 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ21_PRIO</name>
+              <description>IRQ 21 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ20_PRIO</name>
+              <description>IRQ 20 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ19_PRIO</name>
+              <description>IRQ 19 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ18_PRIO</name>
+              <description>IRQ 18 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ17_PRIO</name>
+              <description>IRQ 17 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ16_PRIO</name>
+              <description>IRQ 16 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Source Priority Register 2 (IRQ 32-47) -->
+        <register>
+          <name>INTC_PRIO_REG2</name>
+          <description>Interrupt Source Priority Register 2 (IRQ 32-47, 2-bit each, 4 levels)</description>
+          <addressOffset>0x68</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>IRQ47_PRIO</name>
+              <description>IRQ 47 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ46_PRIO</name>
+              <description>IRQ 46 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ45_PRIO</name>
+              <description>IRQ 45 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ44_PRIO</name>
+              <description>IRQ 44 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ43_PRIO</name>
+              <description>IRQ 43 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ42_PRIO</name>
+              <description>IRQ 42 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ41_PRIO</name>
+              <description>IRQ 41 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ40_PRIO</name>
+              <description>IRQ 40 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ39_PRIO</name>
+              <description>IRQ 39 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ38_PRIO</name>
+              <description>IRQ 38 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ37_PRIO</name>
+              <description>IRQ 37 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ36_PRIO</name>
+              <description>IRQ 36 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ35_PRIO</name>
+              <description>IRQ 35 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ34_PRIO</name>
+              <description>IRQ 34 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ33_PRIO</name>
+              <description>IRQ 33 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ32_PRIO</name>
+              <description>IRQ 32 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Interrupt Source Priority Register 3 (IRQ 48-63) -->
+        <register>
+          <name>INTC_PRIO_REG3</name>
+          <description>Interrupt Source Priority Register 3 (IRQ 48-63, 2-bit each, 4 levels)</description>
+          <addressOffset>0x6C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>IRQ63_PRIO</name>
+              <description>IRQ 63 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ62_PRIO</name>
+              <description>IRQ 62 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ61_PRIO</name>
+              <description>IRQ 61 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ60_PRIO</name>
+              <description>IRQ 60 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ59_PRIO</name>
+              <description>IRQ 59 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ58_PRIO</name>
+              <description>IRQ 58 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ57_PRIO</name>
+              <description>IRQ 57 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ56_PRIO</name>
+              <description>IRQ 56 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ55_PRIO</name>
+              <description>IRQ 55 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ54_PRIO</name>
+              <description>IRQ 54 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ53_PRIO</name>
+              <description>IRQ 53 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ52_PRIO</name>
+              <description>IRQ 52 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ51_PRIO</name>
+              <description>IRQ 51 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ50_PRIO</name>
+              <description>IRQ 50 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ49_PRIO</name>
+              <description>IRQ 49 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IRQ48_PRIO</name>
+              <description>IRQ 48 Priority. 0=Lowest, 3=Highest</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- ========== DMA: Direct Memory Access Controller ========== -->
+    <peripheral>
+      <name>DMA</name>
+      <description>DMA Controller - 4 Normal DMA (NDMA) channels and 4 Dedicated DMA (DDMA) channels</description>
+      <groupName>DMA</groupName>
+      <baseAddress>0x01C02000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <!-- DMA Interrupt Control Register -->
+        <register>
+          <name>DMA_INT_CTRL</name>
+          <description>DMA Interrupt Control Register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DDMA3_FULL_IRQ_EN</name>
+              <description>Dedicated DMA 3 Full Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA3_HALF_IRQ_EN</name>
+              <description>Dedicated DMA 3 Half Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA2_FULL_IRQ_EN</name>
+              <description>Dedicated DMA 2 Full Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA2_HALF_IRQ_EN</name>
+              <description>Dedicated DMA 2 Half Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA1_FULL_IRQ_EN</name>
+              <description>Dedicated DMA 1 Full Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA1_HALF_IRQ_EN</name>
+              <description>Dedicated DMA 1 Half Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA0_FULL_IRQ_EN</name>
+              <description>Dedicated DMA 0 Full Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA0_HALF_IRQ_EN</name>
+              <description>Dedicated DMA 0 Half Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA3_FULL_IRQ_EN</name>
+              <description>Normal DMA 3 Full Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA3_HALF_IRQ_EN</name>
+              <description>Normal DMA 3 Half Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA2_FULL_IRQ_EN</name>
+              <description>Normal DMA 2 Full Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA2_HALF_IRQ_EN</name>
+              <description>Normal DMA 2 Half Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA1_FULL_IRQ_EN</name>
+              <description>Normal DMA 1 Full Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA1_HALF_IRQ_EN</name>
+              <description>Normal DMA 1 Half Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA0_FULL_IRQ_EN</name>
+              <description>Normal DMA 0 Full Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA0_HALF_IRQ_EN</name>
+              <description>Normal DMA 0 Half Transfer Interrupt Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- DMA Interrupt Status Register -->
+        <register>
+          <name>DMA_INT_STA</name>
+          <description>DMA Interrupt Status Register (write 1 to clear)</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DDMA3_FULL_IRQ_PEND</name>
+              <description>Dedicated DMA 3 Full Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA3_HALF_IRQ_PEND</name>
+              <description>Dedicated DMA 3 Half Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA2_FULL_IRQ_PEND</name>
+              <description>Dedicated DMA 2 Full Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA2_HALF_IRQ_PEND</name>
+              <description>Dedicated DMA 2 Half Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA1_FULL_IRQ_PEND</name>
+              <description>Dedicated DMA 1 Full Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA1_HALF_IRQ_PEND</name>
+              <description>Dedicated DMA 1 Half Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA0_FULL_IRQ_PEND</name>
+              <description>Dedicated DMA 0 Full Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DDMA0_HALF_IRQ_PEND</name>
+              <description>Dedicated DMA 0 Half Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA3_FULL_IRQ_PEND</name>
+              <description>Normal DMA 3 Full Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA3_HALF_IRQ_PEND</name>
+              <description>Normal DMA 3 Half Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA2_FULL_IRQ_PEND</name>
+              <description>Normal DMA 2 Full Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA2_HALF_IRQ_PEND</name>
+              <description>Normal DMA 2 Half Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA1_FULL_IRQ_PEND</name>
+              <description>Normal DMA 1 Full Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA1_HALF_IRQ_PEND</name>
+              <description>Normal DMA 1 Half Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA0_FULL_IRQ_PEND</name>
+              <description>Normal DMA 0 Full Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA0_HALF_IRQ_PEND</name>
+              <description>Normal DMA 0 Half Transfer Interrupt Pending. Write 1 to clear.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- DMA Priority Configure Register -->
+        <register>
+          <name>DMA_PTY_CFG</name>
+          <description>DMA Priority Configure Register</description>
+          <addressOffset>0x08</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000190</resetValue>
+          <fields>
+            <field>
+              <name>DMA_AUTO_GATING</name>
+              <description>DMA Auto Clock Gating. 0=Enable auto gating, 1=Disable auto gating. Set to 1 for continuous mode.</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NDMA_PRIO_CNT</name>
+              <description>NDMA Priority Counter. NDMA can continuously access AHB for N+1 times.</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>AC320_PRIO_CNT</name>
+              <description>AC320 Priority Counter. AC320 can continuously access AHB for N+1 times.</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>NDMA_CPU_PRIO</name>
+              <description>NDMA/CPU Priority. 00=CPU&gt;NDMA, 01=NDMA&gt;CPU</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Normal DMA Channel 0 Configure Register -->
+        <register>
+          <name>NDMA_CFG_REG0</name>
+          <description>Normal DMA Channel 0 Configure Register</description>
+          <addressOffset>0x100</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DMA_LOADING</name>
+              <description>DMA Loading. Set 1 to start, auto-cleared when finished. Set 0 to reset channel.</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_BUSY</name>
+              <description>DMA Busy Status. 0=Idle, 1=Busy</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>DMA_CONTINUOUS</name>
+              <description>DMA Continuous Mode Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_WAIT_STATE</name>
+              <description>DMA Wait State. 0=1, 1=2, 2=4, 3=8, 4=16, 5=32, 6=64, 7=128</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>DST_DATA_WIDTH</name>
+              <description>Destination Data Width. 00=8-bit, 01=16-bit, 10=32-bit</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_BURST_LEN</name>
+              <description>Destination Burst Length. 0=1, 1=4</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_ADDR_TYPE</name>
+              <description>Destination Address Type. 00=Linear, 01=IO</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_DRQ_TYPE</name>
+              <description>Destination DRQ Type. 0x01=OWA_TX, 0x04=SPI0_TX, 0x05=SPI1_TX, 0x08=UART0_TX, 0x09=UART1_TX, 0x0A=UART2_TX, 0x0C=AudioCodec_DAC, 0x0E=DAUDIO, 0x10=SRAM, 0x11=SDRAM, 0x14=USB, 0x15=USB_EP1, 0x16=USB_EP2, 0x17=USB_EP3</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>REMAIN_BYTE_READ_EN</name>
+              <description>Remain byte counter read enable. If set, remain byte counter can be read from NDMA_BYTE_CNT_REG.</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DATA_WIDTH</name>
+              <description>Source Data Width. 00=8-bit, 01=16-bit, 10=32-bit</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BURST_LEN</name>
+              <description>Source Burst Length. 0=1, 1=4</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_ADDR_TYPE</name>
+              <description>Source Address Type. 00=Linear, 01=IO</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DRQ_TYPE</name>
+              <description>Source DRQ Type. 0x00=IR_RX, 0x04=SPI0_RX, 0x05=SPI1_RX, 0x08=UART0_RX, 0x09=UART1_RX, 0x0A=UART2_RX, 0x0C=AudioCodec, 0x0D=TP_ADC, 0x0E=DAUDIO, 0x10=SRAM, 0x11=SDRAM, 0x14=USB, 0x15=USB_EP1, 0x16=USB_EP2, 0x17=USB_EP3</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Normal DMA Channel 0 Source Address Register -->
+        <register>
+          <name>NDMA_SRC_ADR_REG0</name>
+          <description>Normal DMA Channel 0 Source Address Register</description>
+          <addressOffset>0x104</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SRC_ADDR</name>
+              <description>Normal DMA Source Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Normal DMA Channel 0 Destination Address Register -->
+        <register>
+          <name>NDMA_DES_ADR_REG0</name>
+          <description>Normal DMA Channel 0 Destination Address Register</description>
+          <addressOffset>0x108</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DES_ADDR</name>
+              <description>Normal DMA Destination Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Normal DMA Channel 0 Byte Counter Register -->
+        <register>
+          <name>NDMA_BYTE_CNT_REG0</name>
+          <description>Normal DMA Channel 0 Byte Counter Register (max 128K)</description>
+          <addressOffset>0x10C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BYTE_CNT</name>
+              <description>Normal DMA Byte Counter. 0=no transfer. Max 128K.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>18</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Normal DMA Channel 1 -->
+        <register>
+          <name>NDMA_CFG_REG1</name>
+          <description>Normal DMA Channel 1 Configure Register</description>
+          <addressOffset>0x120</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DMA_LOADING</name>
+              <description>DMA Loading. Set 1 to start, auto-cleared when finished.</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_BUSY</name>
+              <description>DMA Busy Status. 0=Idle, 1=Busy</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>DMA_CONTINUOUS</name>
+              <description>DMA Continuous Mode Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_WAIT_STATE</name>
+              <description>DMA Wait State</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>DST_DATA_WIDTH</name>
+              <description>Destination Data Width. 00=8-bit, 01=16-bit, 10=32-bit</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_BURST_LEN</name>
+              <description>Destination Burst Length. 0=1, 1=4</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_ADDR_TYPE</name>
+              <description>Destination Address Type. 00=Linear, 01=IO</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_DRQ_TYPE</name>
+              <description>Destination DRQ Type</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>REMAIN_BYTE_READ_EN</name>
+              <description>Remain byte counter read enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DATA_WIDTH</name>
+              <description>Source Data Width. 00=8-bit, 01=16-bit, 10=32-bit</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BURST_LEN</name>
+              <description>Source Burst Length. 0=1, 1=4</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_ADDR_TYPE</name>
+              <description>Source Address Type. 00=Linear, 01=IO</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DRQ_TYPE</name>
+              <description>Source DRQ Type</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_SRC_ADR_REG1</name>
+          <description>Normal DMA Channel 1 Source Address Register</description>
+          <addressOffset>0x124</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SRC_ADDR</name>
+              <description>Normal DMA Source Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_DES_ADR_REG1</name>
+          <description>Normal DMA Channel 1 Destination Address Register</description>
+          <addressOffset>0x128</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DES_ADDR</name>
+              <description>Normal DMA Destination Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_BYTE_CNT_REG1</name>
+          <description>Normal DMA Channel 1 Byte Counter Register</description>
+          <addressOffset>0x12C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BYTE_CNT</name>
+              <description>Normal DMA Byte Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>18</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Normal DMA Channel 2 -->
+        <register>
+          <name>NDMA_CFG_REG2</name>
+          <description>Normal DMA Channel 2 Configure Register</description>
+          <addressOffset>0x140</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DMA_LOADING</name>
+              <description>DMA Loading</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_BUSY</name>
+              <description>DMA Busy Status</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>DMA_CONTINUOUS</name>
+              <description>DMA Continuous Mode Enable</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_WAIT_STATE</name>
+              <description>DMA Wait State</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>DST_DATA_WIDTH</name>
+              <description>Destination Data Width</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_BURST_LEN</name>
+              <description>Destination Burst Length</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_ADDR_TYPE</name>
+              <description>Destination Address Type</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_DRQ_TYPE</name>
+              <description>Destination DRQ Type</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>REMAIN_BYTE_READ_EN</name>
+              <description>Remain byte counter read enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DATA_WIDTH</name>
+              <description>Source Data Width</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BURST_LEN</name>
+              <description>Source Burst Length</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_ADDR_TYPE</name>
+              <description>Source Address Type</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DRQ_TYPE</name>
+              <description>Source DRQ Type</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_SRC_ADR_REG2</name>
+          <description>Normal DMA Channel 2 Source Address Register</description>
+          <addressOffset>0x144</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SRC_ADDR</name>
+              <description>Normal DMA Source Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_DES_ADR_REG2</name>
+          <description>Normal DMA Channel 2 Destination Address Register</description>
+          <addressOffset>0x148</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DES_ADDR</name>
+              <description>Normal DMA Destination Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_BYTE_CNT_REG2</name>
+          <description>Normal DMA Channel 2 Byte Counter Register</description>
+          <addressOffset>0x14C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BYTE_CNT</name>
+              <description>Normal DMA Byte Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>18</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Normal DMA Channel 3 -->
+        <register>
+          <name>NDMA_CFG_REG3</name>
+          <description>Normal DMA Channel 3 Configure Register</description>
+          <addressOffset>0x160</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DMA_LOADING</name>
+              <description>DMA Loading</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_BUSY</name>
+              <description>DMA Busy Status</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>DMA_CONTINUOUS</name>
+              <description>DMA Continuous Mode Enable</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_WAIT_STATE</name>
+              <description>DMA Wait State</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>DST_DATA_WIDTH</name>
+              <description>Destination Data Width</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_BURST_LEN</name>
+              <description>Destination Burst Length</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_ADDR_TYPE</name>
+              <description>Destination Address Type</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_DRQ_TYPE</name>
+              <description>Destination DRQ Type</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>REMAIN_BYTE_READ_EN</name>
+              <description>Remain byte counter read enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DATA_WIDTH</name>
+              <description>Source Data Width</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BURST_LEN</name>
+              <description>Source Burst Length</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_ADDR_TYPE</name>
+              <description>Source Address Type</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DRQ_TYPE</name>
+              <description>Source DRQ Type</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_SRC_ADR_REG3</name>
+          <description>Normal DMA Channel 3 Source Address Register</description>
+          <addressOffset>0x164</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SRC_ADDR</name>
+              <description>Normal DMA Source Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_DES_ADR_REG3</name>
+          <description>Normal DMA Channel 3 Destination Address Register</description>
+          <addressOffset>0x168</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DES_ADDR</name>
+              <description>Normal DMA Destination Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>NDMA_BYTE_CNT_REG3</name>
+          <description>Normal DMA Channel 3 Byte Counter Register</description>
+          <addressOffset>0x16C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BYTE_CNT</name>
+              <description>Normal DMA Byte Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>18</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Dedicated DMA Channel 0 Configure Register -->
+        <register>
+          <name>DDMA_CFG_REG0</name>
+          <description>Dedicated DMA Channel 0 Configure Register</description>
+          <addressOffset>0x300</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DMA_LOADING</name>
+              <description>DMA Loading. Set 1 to start, auto-cleared when finished. Set 0 to stop and reset state machine.</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_BUSY</name>
+              <description>DMA Busy Status. 0=Idle, 1=Busy</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>DMA_CONTINUOUS</name>
+              <description>DMA Continuous Mode Enable. 0=Disable, 1=Enable</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_INCR8_EN</name>
+              <description>Destination INCR8 enable (only valid for DDMA3). 0=Single/INCR4, 1=INCR8</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_DATA_WIDTH</name>
+              <description>Destination Data Width. 00=8-bit, 01=16-bit, 10=32-bit</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_BURST_LEN</name>
+              <description>Destination Burst Length. 0=1, 1=4</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_ADDR_MODE</name>
+              <description>Destination Address Mode. 00=Linear, 01=IO</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_DRQ_TYPE</name>
+              <description>Destination DRQ Type. 0x0=SRAM, 0x1=SDRAM, 0x2=LCDC, 0x4=USB, 0x9=AHB_Memory</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>REMAIN_BYTE_READ_EN</name>
+              <description>Remain byte counter read enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_INCR8_EN</name>
+              <description>Source INCR8 enable (only valid for DDMA3). 0=Single/INCR4, 1=INCR8</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DATA_WIDTH</name>
+              <description>Source Data Width. 00=8-bit, 01=16-bit, 10=32-bit</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BURST_LEN</name>
+              <description>Source Burst Length. 0=1, 1=4</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_ADDR_MODE</name>
+              <description>Source Address Mode. 00=Linear, 01=IO</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DRQ_TYPE</name>
+              <description>Source DRQ Type. 0x0=SRAM, 0x1=SDRAM, 0x4=USB, 0x9=AHB_Memory</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_SRC_ADR_REG0</name>
+          <description>Dedicated DMA Channel 0 Source Address Register</description>
+          <addressOffset>0x304</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SRC_ADDR</name>
+              <description>Dedicated DMA Source Start Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_DES_ADR_REG0</name>
+          <description>Dedicated DMA Channel 0 Destination Address Register</description>
+          <addressOffset>0x308</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DES_ADDR</name>
+              <description>Dedicated DMA Destination Start Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_BYTE_CNT_REG0</name>
+          <description>Dedicated DMA Channel 0 Byte Counter Register (max 0x1000000)</description>
+          <addressOffset>0x30C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BYTE_CNT</name>
+              <description>Dedicated DMA Byte Counter. 0=no transfer. Max 0x1000000.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>25</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_PAR_REG0</name>
+          <description>Dedicated DMA Channel 0 Parameter Register</description>
+          <addressOffset>0x318</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DST_BLOCK_CNT</name>
+              <description>Destination Block Counter (value = N+1)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>DST_COMITY_CNT</name>
+              <description>Destination Comity Counter (value = N+1)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BLOCK_CNT</name>
+              <description>Source Block Counter (value = N+1)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SRC_COMITY_CNT</name>
+              <description>Source Comity Counter (value = N+1)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Dedicated DMA Channel 1 -->
+        <register>
+          <name>DDMA_CFG_REG1</name>
+          <description>Dedicated DMA Channel 1 Configure Register</description>
+          <addressOffset>0x320</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DMA_LOADING</name>
+              <description>DMA Loading</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_BUSY</name>
+              <description>DMA Busy Status</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>DMA_CONTINUOUS</name>
+              <description>DMA Continuous Mode Enable</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_INCR8_EN</name>
+              <description>Destination INCR8 enable</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_DATA_WIDTH</name>
+              <description>Destination Data Width</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_BURST_LEN</name>
+              <description>Destination Burst Length</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_ADDR_MODE</name>
+              <description>Destination Address Mode</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_DRQ_TYPE</name>
+              <description>Destination DRQ Type</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>REMAIN_BYTE_READ_EN</name>
+              <description>Remain byte counter read enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_INCR8_EN</name>
+              <description>Source INCR8 enable</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DATA_WIDTH</name>
+              <description>Source Data Width</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BURST_LEN</name>
+              <description>Source Burst Length</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_ADDR_MODE</name>
+              <description>Source Address Mode</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DRQ_TYPE</name>
+              <description>Source DRQ Type</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_SRC_ADR_REG1</name>
+          <description>Dedicated DMA Channel 1 Source Address Register</description>
+          <addressOffset>0x324</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SRC_ADDR</name>
+              <description>Dedicated DMA Source Start Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_DES_ADR_REG1</name>
+          <description>Dedicated DMA Channel 1 Destination Address Register</description>
+          <addressOffset>0x328</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DES_ADDR</name>
+              <description>Dedicated DMA Destination Start Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_BYTE_CNT_REG1</name>
+          <description>Dedicated DMA Channel 1 Byte Counter Register</description>
+          <addressOffset>0x32C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BYTE_CNT</name>
+              <description>Dedicated DMA Byte Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>25</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_PAR_REG1</name>
+          <description>Dedicated DMA Channel 1 Parameter Register</description>
+          <addressOffset>0x338</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DST_BLOCK_CNT</name>
+              <description>Destination Block Counter (value = N+1)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>DST_COMITY_CNT</name>
+              <description>Destination Comity Counter (value = N+1)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BLOCK_CNT</name>
+              <description>Source Block Counter (value = N+1)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SRC_COMITY_CNT</name>
+              <description>Source Comity Counter (value = N+1)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Dedicated DMA Channel 2 -->
+        <register>
+          <name>DDMA_CFG_REG2</name>
+          <description>Dedicated DMA Channel 2 Configure Register</description>
+          <addressOffset>0x340</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DMA_LOADING</name>
+              <description>DMA Loading</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_BUSY</name>
+              <description>DMA Busy Status</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>DMA_CONTINUOUS</name>
+              <description>DMA Continuous Mode Enable</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_INCR8_EN</name>
+              <description>Destination INCR8 enable</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_DATA_WIDTH</name>
+              <description>Destination Data Width</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_BURST_LEN</name>
+              <description>Destination Burst Length</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_ADDR_MODE</name>
+              <description>Destination Address Mode</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_DRQ_TYPE</name>
+              <description>Destination DRQ Type</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>REMAIN_BYTE_READ_EN</name>
+              <description>Remain byte counter read enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_INCR8_EN</name>
+              <description>Source INCR8 enable</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DATA_WIDTH</name>
+              <description>Source Data Width</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BURST_LEN</name>
+              <description>Source Burst Length</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_ADDR_MODE</name>
+              <description>Source Address Mode</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DRQ_TYPE</name>
+              <description>Source DRQ Type</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_SRC_ADR_REG2</name>
+          <description>Dedicated DMA Channel 2 Source Address Register</description>
+          <addressOffset>0x344</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SRC_ADDR</name>
+              <description>Dedicated DMA Source Start Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_DES_ADR_REG2</name>
+          <description>Dedicated DMA Channel 2 Destination Address Register</description>
+          <addressOffset>0x348</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DES_ADDR</name>
+              <description>Dedicated DMA Destination Start Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_BYTE_CNT_REG2</name>
+          <description>Dedicated DMA Channel 2 Byte Counter Register</description>
+          <addressOffset>0x34C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BYTE_CNT</name>
+              <description>Dedicated DMA Byte Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>25</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_PAR_REG2</name>
+          <description>Dedicated DMA Channel 2 Parameter Register</description>
+          <addressOffset>0x358</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DST_BLOCK_CNT</name>
+              <description>Destination Block Counter (value = N+1)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>DST_COMITY_CNT</name>
+              <description>Destination Comity Counter (value = N+1)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BLOCK_CNT</name>
+              <description>Source Block Counter (value = N+1)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SRC_COMITY_CNT</name>
+              <description>Source Comity Counter (value = N+1)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Dedicated DMA Channel 3 (has extra features: memory set mode, INCR8, general data register) -->
+        <register>
+          <name>DDMA_CFG_REG3</name>
+          <description>Dedicated DMA Channel 3 Configure Register (supports memory set mode, INCR8)</description>
+          <addressOffset>0x360</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DMA_LOADING</name>
+              <description>DMA Loading</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_BUSY</name>
+              <description>DMA Busy Status</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>DMA_CONTINUOUS</name>
+              <description>DMA Continuous Mode Enable</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMA_MEM_SET_MODE</name>
+              <description>Memory set mode enable. 0=Disable, 1=Move data from DDMA_GEN_DATA to destination. Source config (bit10-0) invalid when set.</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_INCR8_EN</name>
+              <description>Destination INCR8 enable. 0=Single/INCR4, 1=INCR8</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_DATA_WIDTH</name>
+              <description>Destination Data Width</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_BURST_LEN</name>
+              <description>Destination Burst Length</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DST_ADDR_MODE</name>
+              <description>Destination Address Mode</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DST_DRQ_TYPE</name>
+              <description>Destination DRQ Type</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>REMAIN_BYTE_READ_EN</name>
+              <description>Remain byte counter read enable</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_INCR8_EN</name>
+              <description>Source INCR8 enable. 0=Single/INCR4, 1=INCR8</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DATA_WIDTH</name>
+              <description>Source Data Width</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BURST_LEN</name>
+              <description>Source Burst Length</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SRC_ADDR_MODE</name>
+              <description>Source Address Mode</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SRC_DRQ_TYPE</name>
+              <description>Source DRQ Type</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_SRC_ADR_REG3</name>
+          <description>Dedicated DMA Channel 3 Source Address Register</description>
+          <addressOffset>0x364</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SRC_ADDR</name>
+              <description>Dedicated DMA Source Start Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_DES_ADR_REG3</name>
+          <description>Dedicated DMA Channel 3 Destination Address Register</description>
+          <addressOffset>0x368</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DES_ADDR</name>
+              <description>Dedicated DMA Destination Start Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_BYTE_CNT_REG3</name>
+          <description>Dedicated DMA Channel 3 Byte Counter Register</description>
+          <addressOffset>0x36C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>BYTE_CNT</name>
+              <description>Dedicated DMA Byte Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>25</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DDMA_PAR_REG3</name>
+          <description>Dedicated DMA Channel 3 Parameter Register</description>
+          <addressOffset>0x378</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DST_BLOCK_CNT</name>
+              <description>Destination Block Counter (value = N+1)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>DST_COMITY_CNT</name>
+              <description>Destination Comity Counter (value = N+1)</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SRC_BLOCK_CNT</name>
+              <description>Source Block Counter (value = N+1)</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>SRC_COMITY_CNT</name>
+              <description>Source Comity Counter (value = N+1)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Dedicated DMA General Data Register (DDMA3 only) -->
+        <register>
+          <name>DDMA_GEN_DATA</name>
+          <description>Dedicated DMA General Data Register (only valid for DDMA3, used with memory set mode)</description>
+          <addressOffset>0x37C</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>GEN_DATA</name>
+              <description>Dedicated DMA general data (used as source in memory set mode)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
   </peripherals>
 </device>

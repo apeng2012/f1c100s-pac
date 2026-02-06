@@ -1,0 +1,196 @@
+#[doc = "Register `NDMA_CFG_REG2` reader"]
+pub type R = crate::R<NdmaCfgReg2Spec>;
+#[doc = "Register `NDMA_CFG_REG2` writer"]
+pub type W = crate::W<NdmaCfgReg2Spec>;
+#[doc = "Field `SRC_DRQ_TYPE` reader - Source DRQ Type"]
+pub type SrcDrqTypeR = crate::FieldReader;
+#[doc = "Field `SRC_DRQ_TYPE` writer - Source DRQ Type"]
+pub type SrcDrqTypeW<'a, REG> = crate::FieldWriter<'a, REG, 5>;
+#[doc = "Field `SRC_ADDR_TYPE` reader - Source Address Type"]
+pub type SrcAddrTypeR = crate::FieldReader;
+#[doc = "Field `SRC_ADDR_TYPE` writer - Source Address Type"]
+pub type SrcAddrTypeW<'a, REG> = crate::FieldWriter<'a, REG, 2>;
+#[doc = "Field `SRC_BURST_LEN` reader - Source Burst Length"]
+pub type SrcBurstLenR = crate::BitReader;
+#[doc = "Field `SRC_BURST_LEN` writer - Source Burst Length"]
+pub type SrcBurstLenW<'a, REG> = crate::BitWriter<'a, REG>;
+#[doc = "Field `SRC_DATA_WIDTH` reader - Source Data Width"]
+pub type SrcDataWidthR = crate::FieldReader;
+#[doc = "Field `SRC_DATA_WIDTH` writer - Source Data Width"]
+pub type SrcDataWidthW<'a, REG> = crate::FieldWriter<'a, REG, 2>;
+#[doc = "Field `REMAIN_BYTE_READ_EN` reader - Remain byte counter read enable"]
+pub type RemainByteReadEnR = crate::BitReader;
+#[doc = "Field `REMAIN_BYTE_READ_EN` writer - Remain byte counter read enable"]
+pub type RemainByteReadEnW<'a, REG> = crate::BitWriter<'a, REG>;
+#[doc = "Field `DST_DRQ_TYPE` reader - Destination DRQ Type"]
+pub type DstDrqTypeR = crate::FieldReader;
+#[doc = "Field `DST_DRQ_TYPE` writer - Destination DRQ Type"]
+pub type DstDrqTypeW<'a, REG> = crate::FieldWriter<'a, REG, 5>;
+#[doc = "Field `DST_ADDR_TYPE` reader - Destination Address Type"]
+pub type DstAddrTypeR = crate::FieldReader;
+#[doc = "Field `DST_ADDR_TYPE` writer - Destination Address Type"]
+pub type DstAddrTypeW<'a, REG> = crate::FieldWriter<'a, REG, 2>;
+#[doc = "Field `DST_BURST_LEN` reader - Destination Burst Length"]
+pub type DstBurstLenR = crate::BitReader;
+#[doc = "Field `DST_BURST_LEN` writer - Destination Burst Length"]
+pub type DstBurstLenW<'a, REG> = crate::BitWriter<'a, REG>;
+#[doc = "Field `DST_DATA_WIDTH` reader - Destination Data Width"]
+pub type DstDataWidthR = crate::FieldReader;
+#[doc = "Field `DST_DATA_WIDTH` writer - Destination Data Width"]
+pub type DstDataWidthW<'a, REG> = crate::FieldWriter<'a, REG, 2>;
+#[doc = "Field `DMA_WAIT_STATE` reader - DMA Wait State"]
+pub type DmaWaitStateR = crate::FieldReader;
+#[doc = "Field `DMA_WAIT_STATE` writer - DMA Wait State"]
+pub type DmaWaitStateW<'a, REG> = crate::FieldWriter<'a, REG, 3>;
+#[doc = "Field `DMA_CONTINUOUS` reader - DMA Continuous Mode Enable"]
+pub type DmaContinuousR = crate::BitReader;
+#[doc = "Field `DMA_CONTINUOUS` writer - DMA Continuous Mode Enable"]
+pub type DmaContinuousW<'a, REG> = crate::BitWriter<'a, REG>;
+#[doc = "Field `DMA_BUSY` reader - DMA Busy Status"]
+pub type DmaBusyR = crate::BitReader;
+#[doc = "Field `DMA_LOADING` reader - DMA Loading"]
+pub type DmaLoadingR = crate::BitReader;
+#[doc = "Field `DMA_LOADING` writer - DMA Loading"]
+pub type DmaLoadingW<'a, REG> = crate::BitWriter<'a, REG>;
+impl R {
+    #[doc = "Bits 0:4 - Source DRQ Type"]
+    #[inline(always)]
+    pub fn src_drq_type(&self) -> SrcDrqTypeR {
+        SrcDrqTypeR::new((self.bits & 0x1f) as u8)
+    }
+    #[doc = "Bits 5:6 - Source Address Type"]
+    #[inline(always)]
+    pub fn src_addr_type(&self) -> SrcAddrTypeR {
+        SrcAddrTypeR::new(((self.bits >> 5) & 3) as u8)
+    }
+    #[doc = "Bit 7 - Source Burst Length"]
+    #[inline(always)]
+    pub fn src_burst_len(&self) -> SrcBurstLenR {
+        SrcBurstLenR::new(((self.bits >> 7) & 1) != 0)
+    }
+    #[doc = "Bits 8:9 - Source Data Width"]
+    #[inline(always)]
+    pub fn src_data_width(&self) -> SrcDataWidthR {
+        SrcDataWidthR::new(((self.bits >> 8) & 3) as u8)
+    }
+    #[doc = "Bit 15 - Remain byte counter read enable"]
+    #[inline(always)]
+    pub fn remain_byte_read_en(&self) -> RemainByteReadEnR {
+        RemainByteReadEnR::new(((self.bits >> 15) & 1) != 0)
+    }
+    #[doc = "Bits 16:20 - Destination DRQ Type"]
+    #[inline(always)]
+    pub fn dst_drq_type(&self) -> DstDrqTypeR {
+        DstDrqTypeR::new(((self.bits >> 16) & 0x1f) as u8)
+    }
+    #[doc = "Bits 21:22 - Destination Address Type"]
+    #[inline(always)]
+    pub fn dst_addr_type(&self) -> DstAddrTypeR {
+        DstAddrTypeR::new(((self.bits >> 21) & 3) as u8)
+    }
+    #[doc = "Bit 23 - Destination Burst Length"]
+    #[inline(always)]
+    pub fn dst_burst_len(&self) -> DstBurstLenR {
+        DstBurstLenR::new(((self.bits >> 23) & 1) != 0)
+    }
+    #[doc = "Bits 24:25 - Destination Data Width"]
+    #[inline(always)]
+    pub fn dst_data_width(&self) -> DstDataWidthR {
+        DstDataWidthR::new(((self.bits >> 24) & 3) as u8)
+    }
+    #[doc = "Bits 26:28 - DMA Wait State"]
+    #[inline(always)]
+    pub fn dma_wait_state(&self) -> DmaWaitStateR {
+        DmaWaitStateR::new(((self.bits >> 26) & 7) as u8)
+    }
+    #[doc = "Bit 29 - DMA Continuous Mode Enable"]
+    #[inline(always)]
+    pub fn dma_continuous(&self) -> DmaContinuousR {
+        DmaContinuousR::new(((self.bits >> 29) & 1) != 0)
+    }
+    #[doc = "Bit 30 - DMA Busy Status"]
+    #[inline(always)]
+    pub fn dma_busy(&self) -> DmaBusyR {
+        DmaBusyR::new(((self.bits >> 30) & 1) != 0)
+    }
+    #[doc = "Bit 31 - DMA Loading"]
+    #[inline(always)]
+    pub fn dma_loading(&self) -> DmaLoadingR {
+        DmaLoadingR::new(((self.bits >> 31) & 1) != 0)
+    }
+}
+impl W {
+    #[doc = "Bits 0:4 - Source DRQ Type"]
+    #[inline(always)]
+    pub fn src_drq_type(&mut self) -> SrcDrqTypeW<'_, NdmaCfgReg2Spec> {
+        SrcDrqTypeW::new(self, 0)
+    }
+    #[doc = "Bits 5:6 - Source Address Type"]
+    #[inline(always)]
+    pub fn src_addr_type(&mut self) -> SrcAddrTypeW<'_, NdmaCfgReg2Spec> {
+        SrcAddrTypeW::new(self, 5)
+    }
+    #[doc = "Bit 7 - Source Burst Length"]
+    #[inline(always)]
+    pub fn src_burst_len(&mut self) -> SrcBurstLenW<'_, NdmaCfgReg2Spec> {
+        SrcBurstLenW::new(self, 7)
+    }
+    #[doc = "Bits 8:9 - Source Data Width"]
+    #[inline(always)]
+    pub fn src_data_width(&mut self) -> SrcDataWidthW<'_, NdmaCfgReg2Spec> {
+        SrcDataWidthW::new(self, 8)
+    }
+    #[doc = "Bit 15 - Remain byte counter read enable"]
+    #[inline(always)]
+    pub fn remain_byte_read_en(&mut self) -> RemainByteReadEnW<'_, NdmaCfgReg2Spec> {
+        RemainByteReadEnW::new(self, 15)
+    }
+    #[doc = "Bits 16:20 - Destination DRQ Type"]
+    #[inline(always)]
+    pub fn dst_drq_type(&mut self) -> DstDrqTypeW<'_, NdmaCfgReg2Spec> {
+        DstDrqTypeW::new(self, 16)
+    }
+    #[doc = "Bits 21:22 - Destination Address Type"]
+    #[inline(always)]
+    pub fn dst_addr_type(&mut self) -> DstAddrTypeW<'_, NdmaCfgReg2Spec> {
+        DstAddrTypeW::new(self, 21)
+    }
+    #[doc = "Bit 23 - Destination Burst Length"]
+    #[inline(always)]
+    pub fn dst_burst_len(&mut self) -> DstBurstLenW<'_, NdmaCfgReg2Spec> {
+        DstBurstLenW::new(self, 23)
+    }
+    #[doc = "Bits 24:25 - Destination Data Width"]
+    #[inline(always)]
+    pub fn dst_data_width(&mut self) -> DstDataWidthW<'_, NdmaCfgReg2Spec> {
+        DstDataWidthW::new(self, 24)
+    }
+    #[doc = "Bits 26:28 - DMA Wait State"]
+    #[inline(always)]
+    pub fn dma_wait_state(&mut self) -> DmaWaitStateW<'_, NdmaCfgReg2Spec> {
+        DmaWaitStateW::new(self, 26)
+    }
+    #[doc = "Bit 29 - DMA Continuous Mode Enable"]
+    #[inline(always)]
+    pub fn dma_continuous(&mut self) -> DmaContinuousW<'_, NdmaCfgReg2Spec> {
+        DmaContinuousW::new(self, 29)
+    }
+    #[doc = "Bit 31 - DMA Loading"]
+    #[inline(always)]
+    pub fn dma_loading(&mut self) -> DmaLoadingW<'_, NdmaCfgReg2Spec> {
+        DmaLoadingW::new(self, 31)
+    }
+}
+#[doc = "Normal DMA Channel 2 Configure Register\n\nYou can [`read`](crate::Reg::read) this register and get [`ndma_cfg_reg2::R`](R). You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`ndma_cfg_reg2::W`](W). You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api)."]
+pub struct NdmaCfgReg2Spec;
+impl crate::RegisterSpec for NdmaCfgReg2Spec {
+    type Ux = u32;
+}
+#[doc = "`read()` method returns [`ndma_cfg_reg2::R`](R) reader structure"]
+impl crate::Readable for NdmaCfgReg2Spec {}
+#[doc = "`write(|w| ..)` method takes [`ndma_cfg_reg2::W`](W) writer structure"]
+impl crate::Writable for NdmaCfgReg2Spec {
+    type Safety = crate::Unsafe;
+}
+#[doc = "`reset()` method sets NDMA_CFG_REG2 to value 0"]
+impl crate::Resettable for NdmaCfgReg2Spec {}

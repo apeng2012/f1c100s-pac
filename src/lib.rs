@@ -60,6 +60,24 @@ impl core::fmt::Debug for Pio {
 }
 #[doc = "Port Controller (GPIO)"]
 pub mod pio;
+#[doc = "Interrupt Controller - Handles up to 64 interrupt sources with 4-level priority, fast forcing, and NMI support"]
+pub type Intc = crate::Periph<intc::RegisterBlock, 0x01c2_0400>;
+impl core::fmt::Debug for Intc {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Intc").finish()
+    }
+}
+#[doc = "Interrupt Controller - Handles up to 64 interrupt sources with 4-level priority, fast forcing, and NMI support"]
+pub mod intc;
+#[doc = "DMA Controller - 4 Normal DMA (NDMA) channels and 4 Dedicated DMA (DDMA) channels"]
+pub type Dma = crate::Periph<dma::RegisterBlock, 0x01c0_2000>;
+impl core::fmt::Debug for Dma {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Dma").finish()
+    }
+}
+#[doc = "DMA Controller - 4 Normal DMA (NDMA) channels and 4 Dedicated DMA (DDMA) channels"]
+pub mod dma;
 #[no_mangle]
 static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r" All the peripherals."]
@@ -77,6 +95,10 @@ pub struct Peripherals {
     pub timer: Timer,
     #[doc = "PIO"]
     pub pio: Pio,
+    #[doc = "INTC"]
+    pub intc: Intc,
+    #[doc = "DMA"]
+    pub dma: Dma,
 }
 impl Peripherals {
     #[doc = r" Returns all the peripherals *once*."]
@@ -105,6 +127,8 @@ impl Peripherals {
             uart2: Uart2::steal(),
             timer: Timer::steal(),
             pio: Pio::steal(),
+            intc: Intc::steal(),
+            dma: Dma::steal(),
         }
     }
 }
